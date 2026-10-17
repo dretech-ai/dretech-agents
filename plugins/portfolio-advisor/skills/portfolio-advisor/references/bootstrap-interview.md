@@ -10,8 +10,9 @@ precision can come later.
 > adviser, fiduciary, or tax professional, and it can be wrong. Verify
 > anything consequential (large trades, Roth conversions, retirement dates)
 > before acting. Your files stay in this folder, but anything I read,
-> including your statements, is sent to Anthropic's API for processing under
-> your Claude account's data terms. `archive/` keeps your original statements
+> including your statements, is sent to the AI provider you're using
+> (Anthropic for Claude, OpenAI for ChatGPT/Codex) under your account's data
+> terms. `archive/` keeps your original statements
 > unredacted, account numbers included, so keep this folder private and out of
 > any public repo or shared cloud drive.
 

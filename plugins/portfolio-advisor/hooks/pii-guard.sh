@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# portfolio-advisor PII guard (PreToolUse on Write|Edit|MultiEdit).
+# portfolio-advisor PII guard (PreToolUse on Write|Edit|MultiEdit in Claude Code,
+# apply_patch in Codex).
 #
 # Blocks a file write when the new content contains a digit run that looks
 # like an account number. Only active inside a portfolio workspace (a cwd with
@@ -12,7 +13,7 @@
 #           (2026-01-01-2026-12-31), masked numbers (••••1234)
 # Disable:  PORTFOLIO_ADVISOR_PII_GUARD=off
 #
-# Exit 2 blocks the tool call and sends stderr back to Claude.
+# Exit 2 blocks the tool call and sends stderr back to the model.
 
 [ "${PORTFOLIO_ADVISOR_PII_GUARD:-on}" = "off" ] && exit 0
 
@@ -28,15 +29,24 @@ exec perl -MJSON::PP -e '
   my $in = eval { decode_json(<STDIN>) } or exit 0;
   my $ti = $in->{tool_input} || {};
   my $cwd = $in->{cwd} // "";
-  my $path = $ti->{file_path} // "";
-  tr{\\}{/} for $cwd, $path;   # Windows paths: C:\x\portfolio -> C:/x/portfolio
-
-  my $in_workspace = ($cwd ne "" && -e "$cwd/portfolio/profile.md")
-                  || $path =~ m{(^|/)(portfolio|reviews)/};
-  exit 0 unless $in_workspace;
-
+  my @paths = ($ti->{file_path} // "");
   my @texts = grep { defined } ($ti->{content}, $ti->{new_string});
   push @texts, map { $_->{new_string} } @{ $ti->{edits} || [] };
+
+  # Codex edits files with apply_patch: the whole patch is in tool_input.command.
+  # Check its target paths and added ("+") lines.
+  if (($in->{tool_name} // "") eq "apply_patch") {
+    my $patch = $ti->{command} // "";
+    $patch = join("\n", @$patch) if ref $patch eq "ARRAY";
+    @paths = $patch =~ /^\*\*\* (?:Add File|Update File|Move to): (.+?)\s*$/mg;
+    push @texts, join("\n", $patch =~ /^\+(.*)$/mg);
+  }
+  tr{\\}{/} for $cwd, @paths;   # Windows paths: C:\x\portfolio -> C:/x/portfolio
+  my $path = join(", ", grep { $_ ne "" } @paths);
+
+  my $in_workspace = ($cwd ne "" && -e "$cwd/portfolio/profile.md")
+                  || grep { m{(^|/)(portfolio|reviews)/} } @paths;
+  exit 0 unless $in_workspace;
 
   my @hits;
   for my $t (@texts) {

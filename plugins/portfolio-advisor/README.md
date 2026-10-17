@@ -1,6 +1,7 @@
 # portfolio-advisor
 
-A blunt, US-focused portfolio analysis tool for [Claude Code](https://claude.com/claude-code).
+A blunt, US-focused portfolio analysis tool for Claude (Desktop and
+[Claude Code](https://claude.com/claude-code)) and ChatGPT/Codex.
 Drop in your brokerage, 401(k), or IRA statements (PDF, CSV, screenshot, or
 pasted text) and get a dated, numbers-first review covering:
 
@@ -19,34 +20,10 @@ See [Where your data goes](#where-your-data-goes).
 
 ## Install
 
-### Option A: Plugin (recommended)
+Pick the app you already use. The desktop apps come first; the terminal
+options are further down.
 
-Includes the skill, the `/review` and `/init-portfolio` commands, and a hook
-that blocks account numbers from being written to files.
-
-```
-/plugin marketplace add dretech-ai/dretech-agents
-/plugin install portfolio-advisor@dretech-ai
-```
-
-### Option B: Standalone skill
-
-Just the skill, with no commands or hook:
-
-```bash
-git clone https://github.com/dretech-ai/dretech-agents.git
-cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
-```
-
-On Windows (PowerShell):
-
-```powershell
-git clone https://github.com/dretech-ai/dretech-agents.git
-New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
-Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
-```
-
-### Option C: Claude Desktop
+### Option A: Claude Desktop
 
 Use it in **Cowork** with a folder connected (or in Desktop's Code tab), so the
 advisor can keep its profile, ledger, and reviews between sessions. In a
@@ -64,12 +41,71 @@ from one chat to the next.
   [.zip](https://github.com/dretech-ai/dretech-agents/releases/latest/download/portfolio-advisor.zip)),
   then go to Customize → Skills → + Add and upload it. No hook.
 
+### Option B: ChatGPT / Codex desktop app
+
+1. Open **Codex** (in the ChatGPT desktop app, or the Codex app) and go to
+   **Plugins**.
+2. Click **Add → Add marketplace** and enter `dretech-ai/dretech-agents`.
+3. Find **Portfolio Advisor** in the list and click **+** to install it.
+4. Start a new chat in a private folder (see [Usage](#usage)) so the advisor
+   can keep its files between sessions.
+5. The first time it runs, Codex asks you to review and trust the plugin's
+   account-number hook. Trust it, or the hook is skipped.
+
+Codex has no `/review` or `/init-portfolio` commands. Just ask: *"set up my
+portfolio advisor"*, then *"review my portfolio"* (or mention
+`$portfolio-advisor`). The hook needs `bash` and `perl`, which macOS has; on
+Windows it hasn't been tested under Codex.
+
+### Option C: Claude Code (terminal)
+
+Includes the skill, the `/review` and `/init-portfolio` commands, and a hook
+that blocks account numbers from being written to files.
+
+```
+/plugin marketplace add dretech-ai/dretech-agents
+/plugin install portfolio-advisor@dretech-ai
+```
+
+### Option D: Codex CLI (terminal)
+
+```bash
+codex plugin marketplace add dretech-ai/dretech-agents
+codex plugin add portfolio-advisor@dretech-ai
+```
+
+Then start `codex` in your finances folder and run `/hooks` once to trust the
+account-number hook. The CLI and the desktop app share this install.
+
+### Option E: Standalone skill
+
+Just the skill, with no commands or hook. For Claude Code:
+
+```bash
+git clone https://github.com/dretech-ai/dretech-agents.git
+cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
+```
+
+On Windows (PowerShell):
+
+```powershell
+git clone https://github.com/dretech-ai/dretech-agents.git
+New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
+Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
+```
+
+For Codex, copy it to `~/.agents/skills/` instead (create that folder if it
+doesn't exist) and restart Codex.
+
 ## Usage
 
 Create a private folder for your finances. **Don't put it in a public repo.**
+In a desktop app, create the folder (for example `finances` in your home
+folder) and connect it: a Cowork folder in Claude Desktop, or the chat's
+project folder in Codex. In a terminal:
 
 ```bash
-mkdir ~/finances && cd ~/finances && claude
+mkdir ~/finances && cd ~/finances && claude    # or: codex
 ```
 
 On Windows (PowerShell):
@@ -105,9 +141,10 @@ archive/YYYY-MM-DD/        # processed statements, moved verbatim
 
 - **Your files stay local.** The profile, ledger, reviews, and archived
   statements are plain files in your folder. Nothing syncs anywhere.
-- **What Claude reads goes to Anthropic.** To analyze a statement, its contents
-  are sent to Anthropic's API, like anything else you share with Claude Code,
-  under your Claude account's data terms.
+- **What the AI reads goes to its provider.** To analyze a statement, its
+  contents are sent to the model's provider, like anything else you share in
+  that app: Anthropic for Claude, OpenAI for ChatGPT/Codex, under your
+  account's data terms there.
 - **`archive/` holds your originals unredacted**, account numbers included.
   Account numbers are kept out of the files the advisor *writes*, not the
   statements you give it. Keep the folder private: not in a public repo, and
@@ -132,9 +169,10 @@ archive/YYYY-MM-DD/        # processed statements, moved verbatim
 
 ## The PII guard
 
-The plugin's `PreToolUse` hook checks every `Write`/`Edit` inside a portfolio
-workspace. It blocks digit runs that look like account numbers (8+ digits,
-optionally hyphenated). Dollar amounts, dates, date ranges, and masked numbers
+The plugin's `PreToolUse` hook checks every file edit inside a portfolio
+workspace (`Write`/`Edit` in Claude Code, `apply_patch` in Codex). It
+blocks digit runs that look like account numbers (8+ digits, optionally
+hyphenated). Dollar amounts, dates, date ranges, and masked numbers
 (`••••1234`) are allowed. It only runs when the working directory has
 `portfolio/profile.md`, or when the target path is under `portfolio/` or
 `reviews/`.
@@ -145,8 +183,11 @@ optionally hyphenated). Dollar amounts, dates, date ranges, and masked numbers
   `perl -MJSON::PP -e 'print "ok\n"'` in Git Bash.
 - If `perl` is missing, the hook doesn't block anything. It shows
   "portfolio-advisor PII guard is OFF" in the transcript on each write instead.
+- Codex skips plugin hooks until you trust them: accept the prompt in the
+  app, or run `/hooks` in the CLI. Codex runs plugin hooks only in its desktop
+  app and CLI, not in ChatGPT on the web.
 - To disable it: `export PORTFOLIO_ADVISOR_PII_GUARD=off` before starting
-  Claude Code (PowerShell: `$env:PORTFOLIO_ADVISOR_PII_GUARD = "off"`).
+  Claude Code or Codex (PowerShell: `$env:PORTFOLIO_ADVISOR_PII_GUARD = "off"`).
 - It doesn't inspect files written through shell commands. The skill's own
   instructions cover that path.
 - It's a pattern match, not a guarantee: account numbers shorter than 8 digits

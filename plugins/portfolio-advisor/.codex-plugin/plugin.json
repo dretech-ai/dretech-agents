@@ -1,0 +1,41 @@
+{
+  "name": "portfolio-advisor",
+  "version": "0.1.5",
+  "description": "Blunt, US-focused portfolio analysis tool: allocation, rebalancing, tax optimization, concentration risk, and retirement trajectory from your own statements, with local markdown memory and an account-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://dretech.ai/agents.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "finance",
+    "portfolio",
+    "retirement",
+    "tax",
+    "rebalancing",
+    "personal-finance"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "Portfolio Advisor",
+    "shortDescription": "Review your portfolio from your own statements",
+    "longDescription": "Drop in brokerage, 401(k), or IRA statements and get a dated, numbers-first review: allocation drift, tax moves (tax-loss harvesting, asset location, Roth conversions), concentration risk, and retirement trajectory. Keeps its memory in local markdown files and keeps account numbers out of the files it writes. Not a registered investment adviser.",
+    "developerName": "dretech-ai",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://dretech.ai/agents.html",
+    "defaultPrompt": [
+      "Set up my portfolio profile",
+      "Review the statements in inbox/",
+      "Am I on track for retirement?"
+    ],
+    "brandColor": "#0F766E",
+    "screenshots": []
+  }
+}
