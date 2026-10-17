@@ -7,6 +7,9 @@ agent comes in two forms:
   Claude Code plugin marketplace.
 - **Standalone skill:** just the skill folder. Copy it into `~/.claude/skills/`.
 
+Install guide: [dretech.ai/agents.html](https://dretech.ai/agents.html). No GitHub
+account needed.
+
 ## Agents
 
 | Agent | What it does | Docs |
