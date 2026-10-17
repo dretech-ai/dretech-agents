@@ -40,6 +40,16 @@ New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
 Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
 ```
 
+### In Claude Desktop
+
+- **Plugin:** Customize → Plugins → Add → Add marketplace, enter
+  `dretech-ai/dretech-agents`, then install the agent from Discover.
+- **Skill:** download `<agent>.skill` from the
+  [latest release](https://github.com/dretech-ai/dretech-agents/releases/latest),
+  then Customize → Skills → + Add → upload it.
+
+See each agent's README for where it runs best.
+
 ### Windows
 
 On native Windows, install [Git for Windows](https://git-scm.com/downloads/win)
@@ -78,8 +88,9 @@ to an agent:
    the agent's entry in `.claude-plugin/marketplace.json`.
 3. Users get it with `/plugin marketplace update dretech-ai`.
 4. To publish a release, run `scripts/package-skills.sh` and attach
-   `dist/<agent>.skill` to the GitHub release under that exact name, so
-   `releases/latest/download/<agent>.skill` always points at the newest one.
+   `dist/<agent>.skill` and `dist/<agent>.zip` to the GitHub release under
+   those exact names, so `releases/latest/download/<agent>.skill` always
+   points at the newest one.
 
 Edit skills only under `skills/`. The copy under `plugins/` is overwritten by
 the sync script. Before committing, `scripts/sync-plugins.sh --check` should

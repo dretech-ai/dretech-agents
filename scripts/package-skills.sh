@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Package each standalone skill as dist/<name>.skill for upload in the Claude
+# Package each standalone skill as dist/<name>.skill (and an identical
+# dist/<name>.zip, for systems that don't recognise .skill) for upload in the Claude
 # apps (Settings > Customize > Skills > Add). A .skill file is a zip whose top
 # level is the skill folder (<name>/SKILL.md), matching anthropics/skills'
 # package_skill.py. LICENSE and NOTICE are added inside the folder.
@@ -20,5 +21,6 @@ for skill_dir in "$root"/skills/*/; do
   rm -f "$out"
   (cd "$stage" && zip -qrX "$out" "$name" -x '*.DS_Store')
   rm -rf "$stage"
-  echo "packaged $out"
+  cp "$out" "$dist/$name.zip"
+  echo "packaged $out (+ $name.zip)"
 done

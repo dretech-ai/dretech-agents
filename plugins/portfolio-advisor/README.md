@@ -46,6 +46,24 @@ New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
 Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
 ```
 
+### Option C: Claude Desktop
+
+Use it in **Cowork** with a folder connected (or in Desktop's Code tab), so the
+advisor can keep its profile, ledger, and reviews between sessions. In a
+regular chat it can analyze what you attach, but it can't remember anything
+from one chat to the next.
+
+- **Plugin (includes the hook):** Customize → Plugins → Add → Add marketplace,
+  enter `dretech-ai/dretech-agents`, then install portfolio-advisor from
+  Discover. The account-number hook runs in Cowork and the Code tab, not in
+  chat.
+- **Skill only:** turn on Settings → Capabilities → *Code execution and file
+  creation*. Download
+  [portfolio-advisor.skill](https://github.com/dretech-ai/dretech-agents/releases/latest/download/portfolio-advisor.skill)
+  (or the identical
+  [.zip](https://github.com/dretech-ai/dretech-agents/releases/latest/download/portfolio-advisor.zip)),
+  then go to Customize → Skills → + Add and upload it. No hook.
+
 ## Usage
 
 Create a private folder for your finances. **Don't put it in a public repo.**
