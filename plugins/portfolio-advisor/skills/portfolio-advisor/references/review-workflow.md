@@ -3,7 +3,8 @@
 Run this when the user asks for a review or drops a document in `inbox/`.
 
 1. **Load state** — read `portfolio/profile.md`, `portfolio/target-allocation.md`,
-   `portfolio/ledger.md`.
+   `portfolio/ledger.md`. Then check `portfolio/tax-figures.md` and refresh
+   it first if it's missing or stale (see [tax-data.md](tax-data.md)).
 2. **Bootstrap if needed** — if the profile is empty or placeholders only, run
    [bootstrap-interview.md](bootstrap-interview.md) first and stop the review
    until the target allocation is confirmed.

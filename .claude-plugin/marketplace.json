@@ -10,7 +10,7 @@
       "name": "portfolio-advisor",
       "source": "./plugins/portfolio-advisor",
       "description": "Blunt, US-focused portfolio analysis tool with local markdown memory and an account-number guard.",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "category": "productivity"
     }
   ]

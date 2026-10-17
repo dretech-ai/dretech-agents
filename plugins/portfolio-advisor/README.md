@@ -52,13 +52,14 @@ from one chat to the next.
 5. The first time it runs, Codex asks you to review and trust the plugin's
    account-number hook. Trust it, or the hook is skipped.
 
-Codex has no `/review` or `/init-portfolio` commands. Just ask: *"set up my
-portfolio advisor"*, then *"review my portfolio"* (or mention
-`$portfolio-advisor`). The hook needs `bash` and `perl`.
+Codex has no `/review`, `/init-portfolio`, or `/update-tax-data` commands.
+Just ask: *"set up my portfolio advisor"*, then *"review my portfolio"* or
+*"update my tax figures"* (or mention `$portfolio-advisor`). The hook needs `bash` and `perl`.
 
 ### Option C: Claude Code (terminal)
 
-Includes the skill, the `/review` and `/init-portfolio` commands, and a hook
+Includes the skill, the `/review`, `/init-portfolio`, and `/update-tax-data`
+commands, and a hook
 that blocks account numbers from being written to files.
 
 ```
@@ -117,20 +118,42 @@ mkdir "$HOME\finances"; cd "$HOME\finances"; claude
 /init-portfolio          # scaffolds folders, then interviews you (retirement year, income, constraints)
                          # drop statements into inbox/
 /review                  # full review → reviews/YYYY-MM-DD-<slug>.md
+/update-tax-data [year]  # refresh brackets, contribution limits, IRMAA → portfolio/tax-figures.md
 ```
 
 If another plugin or a built-in command also uses `/review`, call these by
-their namespaced names: `/portfolio-advisor:review` and
-`/portfolio-advisor:init-portfolio`.
+their namespaced names: `/portfolio-advisor:review`,
+`/portfolio-advisor:init-portfolio`, and `/portfolio-advisor:update-tax-data`.
 
 Without the plugin, just say *"set up my portfolio advisor"* and then
 *"review my portfolio"*.
+
+### Tax figures
+
+Brackets, contribution limits, LTCG thresholds, IRMAA tiers, and the RMD age
+change every year, so the advisor doesn't rely on what the model remembers.
+It keeps the current year's figures, with a source link for each table, in
+`portfolio/tax-figures.md`. Each review checks that file first and refreshes
+it when it's missing, from a previous year, or more than six months old.
+`/update-tax-data` (or *"update my tax figures"*) forces a refresh.
+
+Where the figures come from, in order:
+
+1. **Live:** IRS.gov, SSA.gov, and CMS.gov, when the app gives the model web
+   access.
+2. **Bundled:** a copy of the current year's figures that ships with the
+   skill and was checked against those sites at release.
+3. **You:** otherwise it asks you to paste them, or it labels each figure it
+   uses as unverified.
+
+Each review states which tax year and source it used.
 
 ```
 portfolio/
 ├── profile.md             # life stage, retirement year, income/spend, constraints
 ├── target-allocation.md   # target mix + glide path (proposed, then you confirm)
-└── ledger.md              # dated snapshots, cash flows, recommendation tracker
+├── ledger.md              # dated snapshots, cash flows, recommendation tracker
+└── tax-figures.md         # this year's brackets and limits, with sources
 reviews/                   # one dated report per review
 inbox/                     # drop new statements here
 archive/YYYY-MM-DD/        # processed statements, moved verbatim
@@ -151,6 +174,10 @@ archive/YYYY-MM-DD/        # processed statements, moved verbatim
   synced drive. On Windows, Desktop and Documents are often synced to OneDrive
   by default; a folder directly under your user folder (`$HOME\finances`)
   usually isn't.
+- **Tax-figure lookups are generic.** When it refreshes tax figures, the
+  advisor searches public government pages using only the year and the figure
+  name (for example, "2026 IRA contribution limit"). It never puts your income,
+  balances, age, or any account details into a search.
 - **The hook makes no network calls.** `hooks/pii-guard.sh` reads the pending
   write from stdin and exits. Read it yourself; it's short.
 

@@ -1,6 +1,6 @@
 {
   "name": "portfolio-advisor",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Blunt, US-focused portfolio analysis tool: allocation, rebalancing, tax optimization, concentration risk, and retirement trajectory from your own statements, with local markdown memory and an account-number guard.",
   "author": {
     "name": "dretech-ai",
@@ -33,7 +33,8 @@
     "defaultPrompt": [
       "Set up my portfolio profile",
       "Review the statements in inbox/",
-      "Am I on track for retirement?"
+      "Am I on track for retirement?",
+      "Update my tax figures"
     ],
     "brandColor": "#0F766E",
     "screenshots": []

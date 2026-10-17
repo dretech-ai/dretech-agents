@@ -1,6 +1,6 @@
 ---
 name: portfolio-advisor
-description: Blunt, US-focused portfolio analysis tool that reviews a portfolio from shared documents (brokerage/401k/IRA statements as PDF, CSV, screenshots, or pasted text) and keeps persistent state in local markdown files. Use when the user asks to review their portfolio, drops a statement in inbox/, or asks about asset allocation, rebalancing, drift, expense ratios, fund overlap, tax-loss harvesting, wash sales, asset location, Roth conversions, capital-gains timing, concentration risk, employer stock, retirement trajectory, FIRE, withdrawal order, or Social Security timing.
+description: Blunt, US-focused portfolio analysis tool that reviews a portfolio from shared documents (brokerage/401k/IRA statements as PDF, CSV, screenshots, or pasted text) and keeps persistent state in local markdown files. Use when the user asks to review their portfolio, drops a statement in inbox/, or asks about asset allocation, rebalancing, drift, expense ratios, fund overlap, tax-loss harvesting, wash sales, asset location, Roth conversions, capital-gains timing, concentration risk, employer stock, retirement trajectory, FIRE, withdrawal order, or Social Security timing. Also use when the user asks to update or check tax figures, brackets, or contribution limits.
 ---
 
 # Portfolio Advisor
@@ -75,10 +75,13 @@ tool whose output the user verifies before acting.
   short-term gain; trades near a wash-sale window; changes to the retirement
   date, withdrawal order, or Social Security claiming age; and any single
   trade over 10% of the portfolio.
-- **Tax rules change yearly.** State the tax year whose brackets, limits and
-  thresholds you're using. If you aren't sure of a current-year figure
-  (contribution limits, LTCG brackets, IRMAA tiers, RMD age), say so and point
-  to where to confirm it. Don't present a remembered number as current.
+- **Tax rules change yearly.** Take brackets, limits and thresholds
+  (contribution limits, LTCG brackets, IRMAA tiers, RMD age) from
+  `portfolio/tax-figures.md`, and refresh it when it's missing or stale (see
+  [references/tax-data.md](references/tax-data.md)). State the tax year and
+  source you're using. A figure that isn't in that file, or is marked
+  unverified, gets labeled as such. Don't present a remembered number as
+  current.
 
 ## Persistent state
 
@@ -88,7 +91,8 @@ All paths are relative to the directory the user is working in.
 portfolio/
 ├── profile.md             # Life stage, retirement year, income/spend, lens, hard constraints
 ├── target-allocation.md   # Target mix (you propose on first review; user confirms)
-└── ledger.md              # Dated holdings snapshots, cost basis, cash flows, recommendation tracker
+├── ledger.md              # Dated holdings snapshots, cost basis, cash flows, recommendation tracker
+└── tax-figures.md         # Current-year brackets and limits, with sources (see references/tax-data.md)
 reviews/                   # One dated report per review: YYYY-MM-DD-<slug>.md
 inbox/                     # User drops new statements here
 archive/<YYYY-MM-DD>/      # Processed source documents, moved verbatim
