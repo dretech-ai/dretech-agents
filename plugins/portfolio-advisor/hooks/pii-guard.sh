@@ -8,7 +8,8 @@
 #
 # Flagged:  8+ digits, optionally hyphen-separated (12345678, 1234-5678-9012, 123-45-6789)
 # Allowed:  dollar amounts ($1,234,567.89), decimals, ISO dates (2026-10-17),
-#           YYYYMMDD dates, year ranges (2026-2036), masked numbers (••••1234)
+#           YYYYMMDD dates, year ranges (2026-2036), ISO date ranges
+#           (2026-01-01-2026-12-31), masked numbers (••••1234)
 # Disable:  PORTFOLIO_ADVISOR_PII_GUARD=off
 #
 # Exit 2 blocks the tool call and sends stderr back to Claude.
@@ -38,6 +39,8 @@ exec perl -MJSON::PP -e '
       next if $run =~ /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;   # ISO date
       next if $run =~ /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;     # YYYYMMDD
       next if $run =~ /^(19|20)\d\d-(19|20)\d\d$/;                             # year range
+      my $iso = qr/(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
+      next if $run =~ /^$iso-$iso$/;                                         # ISO date range
       push @hits, "...." . substr($digits, -4);
     }
   }

@@ -52,6 +52,10 @@ mkdir ~/finances && cd ~/finances && claude
 /review                  # full review → reviews/YYYY-MM-DD-<slug>.md
 ```
 
+If another plugin or a built-in command also uses `/review`, call these by
+their namespaced names: `/portfolio-advisor:review` and
+`/portfolio-advisor:init-portfolio`.
+
 Without the plugin, just say *"set up my portfolio advisor"* and then
 *"review my portfolio"*.
 
@@ -95,7 +99,7 @@ archive/YYYY-MM-DD/        # processed statements, moved verbatim
 
 The plugin's `PreToolUse` hook checks every `Write`/`Edit` inside a portfolio
 workspace. It blocks digit runs that look like account numbers (8+ digits,
-optionally hyphenated). Dollar amounts, dates, and masked numbers
+optionally hyphenated). Dollar amounts, dates, date ranges, and masked numbers
 (`••••1234`) are allowed. It only runs when the working directory has
 `portfolio/profile.md`, or when the target path is under `portfolio/` or
 `reviews/`.

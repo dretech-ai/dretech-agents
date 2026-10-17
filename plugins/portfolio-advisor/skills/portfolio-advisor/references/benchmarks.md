@@ -23,7 +23,9 @@ the one-fund default for my horizon?"
 | 2043–2047       | VTIVX (2045) | FIOFX (2045)       | SWYHX (2045)        |
 | 2048–2052       | VFIFX (2050) | FIPFX (2050)       | SWYMX (2050)        |
 | 2053–2057       | VFFVX (2055) | FDEWX (2055)       | SWYJX (2055)        |
-| 2058+           | VTTSX (2060) | FDKLX (2060)       | SWYNX (2060)        |
+| 2058–2062       | VTTSX (2060) | FDKLX (2060)       | SWYNX (2060)        |
+| 2063–2067       | VLXVX (2065) | FFIJX (2065)       | SWYOX (2065)        |
+| 2068+           | VSVNX (2070) | FRBVX (2070)       | SWYPX (2070)        |
 
 Default to Vanguard unless the user's primary custodian offers its own series.
 Tickers are Investor-class shares, verified against the SEC EDGAR mutual-fund
