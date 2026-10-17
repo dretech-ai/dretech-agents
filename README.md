@@ -1,4 +1,4 @@
-# claude-agents
+# dretech-agents
 
 Agents for [Claude Code](https://claude.com/claude-code) from dretech-ai. Each
 agent comes in two forms:
@@ -11,22 +11,22 @@ agent comes in two forms:
 
 | Agent | What it does | Docs |
 |-------|--------------|------|
-| **portfolio-advisor** | Blunt, US-focused financial advisor. Reviews your statements for allocation drift, tax moves (TLH, asset location, Roth conversions), concentration risk, and retirement trajectory. Keeps its memory in local markdown and blocks account numbers from being written to disk. | [README](plugins/portfolio-advisor/README.md) |
+| **portfolio-advisor** | Blunt, US-focused portfolio analysis tool. Reviews your statements for allocation drift, tax moves (TLH, asset location, Roth conversions), concentration risk, and retirement trajectory. Keeps its memory in local markdown and keeps account numbers out of the files it writes. Not a registered investment adviser. | [README](plugins/portfolio-advisor/README.md) |
 
 ## Install
 
 ### As plugins (recommended)
 
 ```
-/plugin marketplace add dretech-ai/claude-agents
+/plugin marketplace add dretech-ai/dretech-agents
 /plugin install portfolio-advisor@dretech-ai
 ```
 
 ### As standalone skills
 
 ```bash
-git clone https://github.com/dretech-ai/claude-agents.git
-cp -r claude-agents/skills/portfolio-advisor ~/.claude/skills/
+git clone https://github.com/dretech-ai/dretech-agents.git
+cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
 ```
 
 ## Repo layout

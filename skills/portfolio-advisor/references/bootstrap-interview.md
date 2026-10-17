@@ -4,6 +4,19 @@ Run this when `portfolio/profile.md` is missing or still has placeholders. Ask
 in one or two batches, not one question at a time. Accept rough answers —
 precision can come later.
 
+## Disclosure (say this first, once)
+
+> Before we start: this is an analysis tool, not a registered investment
+> adviser, fiduciary, or tax professional, and it can be wrong. Verify
+> anything consequential (large trades, Roth conversions, retirement dates)
+> before acting. Your files stay in this folder, but anything I read,
+> including your statements, is sent to Anthropic's API for processing under
+> your Claude account's data terms. `archive/` keeps your original statements
+> unredacted, account numbers included, so keep this folder private and out of
+> any public repo or shared cloud drive.
+
+Then continue with the questions.
+
 ## Required
 
 - **Target retirement year** (and current age or birth year). Drives the

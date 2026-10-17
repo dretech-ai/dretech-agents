@@ -1,6 +1,6 @@
 # portfolio-advisor
 
-A blunt, US-focused personal financial advisor for [Claude Code](https://claude.com/claude-code).
+A blunt, US-focused portfolio analysis tool for [Claude Code](https://claude.com/claude-code).
 Drop in your brokerage, 401(k), or IRA statements (PDF, CSV, screenshot, or
 pasted text) and get a dated, numbers-first review covering:
 
@@ -14,8 +14,8 @@ folder: a profile, a target allocation, and a ledger of snapshots. Every review
 grades the previous review's recommendations, so ignored advice gets pushed
 back on instead of quietly repeated.
 
-**No account access, no cloud sync.** It only reads the documents you give it,
-and it never writes account numbers to disk.
+It never logs in to your accounts. It only reads the documents you give it.
+See [Where your data goes](#where-your-data-goes).
 
 ## Install
 
@@ -25,7 +25,7 @@ Includes the skill, the `/review` and `/init-portfolio` commands, and a hook
 that blocks account numbers from being written to files.
 
 ```
-/plugin marketplace add dretech-ai/claude-agents
+/plugin marketplace add dretech-ai/dretech-agents
 /plugin install portfolio-advisor@dretech-ai
 ```
 
@@ -34,8 +34,8 @@ that blocks account numbers from being written to files.
 Just the skill, with no commands or hook:
 
 ```bash
-git clone https://github.com/dretech-ai/claude-agents.git
-cp -r claude-agents/skills/portfolio-advisor ~/.claude/skills/
+git clone https://github.com/dretech-ai/dretech-agents.git
+cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
 ```
 
 ## Usage
@@ -65,6 +65,20 @@ inbox/                     # drop new statements here
 archive/YYYY-MM-DD/        # processed statements, moved verbatim
 ```
 
+## Where your data goes
+
+- **Your files stay local.** The profile, ledger, reviews, and archived
+  statements are plain files in your folder. Nothing syncs anywhere.
+- **What Claude reads goes to Anthropic.** To analyze a statement, its contents
+  are sent to Anthropic's API, like anything else you share with Claude Code,
+  under your Claude account's data terms.
+- **`archive/` holds your originals unredacted**, account numbers included.
+  Account numbers are kept out of the files the advisor *writes*, not the
+  statements you give it. Keep the folder private: not in a public repo, and
+  think twice before putting it in iCloud, Dropbox, or another synced drive.
+- **The hook makes no network calls.** `hooks/pii-guard.sh` reads the pending
+  write from stdin and exits. Read it yourself; it's short.
+
 ## Philosophy
 
 - **US tax rules** built in (401k, Traditional/Roth IRA, HSA, 529, LTCG/STCG, wash sale, backdoor Roth).
@@ -90,12 +104,18 @@ optionally hyphenated). Dollar amounts, dates, and masked numbers
 - To disable it: `export PORTFOLIO_ADVISOR_PII_GUARD=off`
 - It doesn't inspect files written through shell commands. The skill's own
   instructions cover that path.
+- It's a pattern match, not a guarantee: account numbers shorter than 8 digits
+  or written with spaces get through.
 
 ## Disclaimer
 
-This is an educational tool, not a fiduciary or a registered investment
-adviser. It can be wrong. Double-check anything consequential, like large
-trades, Roth conversions, or retirement dates, before acting.
+This is an educational analysis tool. It is not a registered investment
+adviser, a fiduciary, a broker-dealer, or a tax professional, and nothing it
+produces is personalized investment, tax, or legal advice. It can be wrong,
+including about tax rules that change every year. You are responsible for
+your own decisions: verify anything consequential, like large trades, Roth
+conversions, or retirement dates, before acting. Provided as is, without
+warranty, under the MIT license.
 
 ## License
 
