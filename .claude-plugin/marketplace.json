@@ -1,6 +1,6 @@
 {
   "name": "dretech-ai",
-  "description": "Claude Code plugins from dretech-ai.",
+  "description": "Claude Code agents from dretech-ai — each available as a plugin or a standalone skill.",
   "owner": {
     "name": "dretech-ai",
     "url": "https://github.com/dretech-ai"
@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "portfolio-advisor",
-      "source": "./plugin",
+      "source": "./plugins/portfolio-advisor",
       "description": "Blunt, US-focused portfolio advisor with local markdown memory and an account-number guard.",
       "version": "0.1.0",
       "category": "productivity"
