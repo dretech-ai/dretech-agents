@@ -26,7 +26,9 @@ the one-fund default for my horizon?"
 | 2058+           | VTTSX (2060) | FDKLX (2060)       | SWYNX (2060)        |
 
 Default to Vanguard unless the user's primary custodian offers its own series.
-Verify tickers when you can — fund families rename and merge share classes.
+Tickers are Investor-class shares, verified against the SEC EDGAR mutual-fund
+registry on 2026-10-17. Fund families occasionally rename or merge share
+classes, so re-check if a ticker doesn't resolve.
 
 Also compare the **risk profile**, not just the return: the TDF's current
 stock/bond split is the plain default the user's allocation should beat or
