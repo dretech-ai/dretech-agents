@@ -54,8 +54,7 @@ from one chat to the next.
 
 Codex has no `/review` or `/init-portfolio` commands. Just ask: *"set up my
 portfolio advisor"*, then *"review my portfolio"* (or mention
-`$portfolio-advisor`). The hook needs `bash` and `perl`, which macOS has; on
-Windows it hasn't been tested under Codex.
+`$portfolio-advisor`). The hook needs `bash` and `perl`.
 
 ### Option C: Claude Code (terminal)
 
