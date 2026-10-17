@@ -41,8 +41,9 @@ Run this when the user asks for a review or drops a document in `inbox/`.
    states *what*, *why*, *expected impact* (in dollars where possible), and
    *when*.
 8. **Link the review** from the new ledger snapshot row.
-9. **Archive sources** — `mkdir -p archive/<review-date>/` and move every
-   processed file out of `inbox/` into it, unchanged. `inbox/` should be empty
+9. **Archive sources** — create `archive/<review-date>/` (with whatever shell
+   is available: bash or PowerShell) and move every processed file out of
+   `inbox/` into it, unchanged. `inbox/` should be empty
    (except `.gitkeep`) afterwards. List the archived paths in the review.
 10. **Grade prior recommendations** — for each action in the previous review:
     Done / Partial / Not done. For "not done," push back and ask why; don't

@@ -16,12 +16,20 @@
 
 [ "${PORTFOLIO_ADVISOR_PII_GUARD:-on}" = "off" ] && exit 0
 
+# No perl (e.g. Windows without Git for Windows): say so instead of silently
+# doing nothing. Exit 1 is a non-blocking error, so writes still go through.
+if ! command -v perl >/dev/null 2>&1; then
+  echo "portfolio-advisor PII guard is OFF: perl not found (on Windows, install Git for Windows)" >&2
+  exit 1
+fi
+
 exec perl -MJSON::PP -e '
   local $/;
   my $in = eval { decode_json(<STDIN>) } or exit 0;
   my $ti = $in->{tool_input} || {};
   my $cwd = $in->{cwd} // "";
   my $path = $ti->{file_path} // "";
+  tr{\\}{/} for $cwd, $path;   # Windows paths: C:\x\portfolio -> C:/x/portfolio
 
   my $in_workspace = ($cwd ne "" && -e "$cwd/portfolio/profile.md")
                   || $path =~ m{(^|/)(portfolio|reviews)/};

@@ -6,7 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}/hooks/pii-guard.sh\""
+            "command": "bash",
+            "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/pii-guard.sh"]
           }
         ]
       }

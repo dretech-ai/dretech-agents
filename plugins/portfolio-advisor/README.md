@@ -38,12 +38,26 @@ git clone https://github.com/dretech-ai/dretech-agents.git
 cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
 ```
 
+On Windows (PowerShell):
+
+```powershell
+git clone https://github.com/dretech-ai/dretech-agents.git
+New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
+Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
+```
+
 ## Usage
 
 Create a private folder for your finances. **Don't put it in a public repo.**
 
 ```bash
 mkdir ~/finances && cd ~/finances && claude
+```
+
+On Windows (PowerShell):
+
+```powershell
+mkdir "$HOME\finances"; cd "$HOME\finances"; claude
 ```
 
 ```
@@ -79,7 +93,10 @@ archive/YYYY-MM-DD/        # processed statements, moved verbatim
 - **`archive/` holds your originals unredacted**, account numbers included.
   Account numbers are kept out of the files the advisor *writes*, not the
   statements you give it. Keep the folder private: not in a public repo, and
-  think twice before putting it in iCloud, Dropbox, or another synced drive.
+  think twice before putting it in iCloud, Dropbox, OneDrive, or another
+  synced drive. On Windows, Desktop and Documents are often synced to OneDrive
+  by default; a folder directly under your user folder (`$HOME\finances`)
+  usually isn't.
 - **The hook makes no network calls.** `hooks/pii-guard.sh` reads the pending
   write from stdin and exits. Read it yourself; it's short.
 
@@ -104,8 +121,14 @@ optionally hyphenated). Dollar amounts, dates, date ranges, and masked numbers
 `portfolio/profile.md`, or when the target path is under `portfolio/` or
 `reviews/`.
 
-- Requires `perl` (preinstalled on macOS and most Linux distros).
-- To disable it: `export PORTFOLIO_ADVISOR_PII_GUARD=off`
+- Requires `bash` and `perl`, both preinstalled on macOS and most Linux
+  distros. On Windows, install [Git for Windows](https://git-scm.com/downloads/win):
+  Claude Code runs hooks in Git Bash, which includes `perl`. To check, run
+  `perl -MJSON::PP -e 'print "ok\n"'` in Git Bash.
+- If `perl` is missing, the hook doesn't block anything. It shows
+  "portfolio-advisor PII guard is OFF" in the transcript on each write instead.
+- To disable it: `export PORTFOLIO_ADVISOR_PII_GUARD=off` before starting
+  Claude Code (PowerShell: `$env:PORTFOLIO_ADVISOR_PII_GUARD = "off"`).
 - It doesn't inspect files written through shell commands. The skill's own
   instructions cover that path.
 - It's a pattern match, not a guarantee: account numbers shorter than 8 digits

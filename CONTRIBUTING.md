@@ -33,7 +33,11 @@ In short:
    claude plugin validate plugins/<agent>
    ```
 
-If you change a hook, describe the inputs you tested it with in the PR.
+The scripts need `bash` and `rsync`. On Windows, run them in WSL; Git Bash
+doesn't include `rsync`.
+
+If you change a hook, describe the inputs you tested it with in the PR, and
+whether you tested on macOS, Linux, or Windows.
 
 ## License
 

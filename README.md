@@ -32,6 +32,20 @@ git clone https://github.com/dretech-ai/dretech-agents.git
 cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
 ```
 
+On Windows (PowerShell):
+
+```powershell
+git clone https://github.com/dretech-ai/dretech-agents.git
+New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
+Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
+```
+
+### Windows
+
+On native Windows, install [Git for Windows](https://git-scm.com/downloads/win)
+first: Claude Code runs plugin hooks in Git Bash, and without it they don't run. See each
+agent's README for details.
+
 ## Repo layout
 
 ```
