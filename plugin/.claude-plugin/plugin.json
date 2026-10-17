@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-advisor",
+  "version": "0.1.0",
+  "description": "Blunt, US-focused portfolio advisor: allocation, rebalancing, tax optimization, concentration risk, and retirement trajectory from your own statements, with local markdown memory and an account-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://github.com/dretech-ai/portfolio-advisor",
+  "repository": "https://github.com/dretech-ai/portfolio-advisor",
+  "license": "MIT",
+  "keywords": ["finance", "portfolio", "retirement", "tax", "rebalancing", "personal-finance"]
+}

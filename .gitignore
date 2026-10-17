@@ -1,0 +1,6 @@
+# Personal financial data — never commit if you run the advisor inside a clone
+portfolio/
+reviews/
+inbox/
+archive/
+.DS_Store
