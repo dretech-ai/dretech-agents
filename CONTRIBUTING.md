@@ -2,6 +2,9 @@
 
 Issues and pull requests are welcome.
 
+Everyone taking part is expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+Report security problems privately; see [SECURITY.md](SECURITY.md).
+
 ## Reporting a problem
 
 Open an issue with the agent name, what you asked, and what went wrong.

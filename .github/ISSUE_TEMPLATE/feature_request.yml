@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an improvement or a new agent
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent
+      options:
+        - portfolio-advisor
+        - New agent
+        - Repo / marketplace / other
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you'd like
+      description: The problem it solves, and how you'd expect it to work. Use made-up numbers in any examples.
+    validations:
+      required: true

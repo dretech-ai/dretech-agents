@@ -1,0 +1,49 @@
+name: Bug report
+description: Something in an agent, plugin, or skill doesn't work as described
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Never paste real statements, account numbers, balances, or other personal financial data.** Use made-up numbers. Security problems, including account numbers getting past the PII guard, go to [a private report](https://github.com/dretech-ai/dretech-agents/security/advisories/new), not here.
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent
+      options:
+        - portfolio-advisor
+        - Repo / marketplace / other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Agent version
+      description: From `claude plugin list`, or "standalone skill"
+      placeholder: "0.1.3"
+    validations:
+      required: true
+  - type: input
+    id: claude-version
+    attributes:
+      label: Claude Code version
+      description: From `claude --version`
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you asked or ran, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest made-up input that shows the problem.
+  - type: checkboxes
+    id: no-pii
+    attributes:
+      label: Privacy check
+      options:
+        - label: This issue contains no real account numbers, statements, or personal financial data.
+          required: true
