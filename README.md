@@ -49,6 +49,17 @@ scripts/sync-plugins.sh           # copy every skills/<agent> into plugins/<agen
    `claude plugin validate . && claude plugin validate plugins/<agent>`.
 5. Add a row to the Agents table above.
 
+## Releasing a change
+
+Installed plugins only update when the version number changes. For any change
+to an agent:
+
+1. Edit under `skills/<agent>/` (never the copy under `plugins/`), then run
+   `scripts/sync-plugins.sh`.
+2. Bump `version` in **both** `plugins/<agent>/.claude-plugin/plugin.json` and
+   the agent's entry in `.claude-plugin/marketplace.json`.
+3. Users get it with `/plugin marketplace update dretech-ai`.
+
 Edit skills only under `skills/`. The copy under `plugins/` is overwritten by
 the sync script. Before committing, `scripts/sync-plugins.sh --check` should
 pass.

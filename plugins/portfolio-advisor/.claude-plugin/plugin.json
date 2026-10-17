@@ -1,6 +1,6 @@
 {
   "name": "portfolio-advisor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Blunt, US-focused portfolio advisor: allocation, rebalancing, tax optimization, concentration risk, and retirement trajectory from your own statements, with local markdown memory and an account-number guard.",
   "author": {
     "name": "dretech-ai",
