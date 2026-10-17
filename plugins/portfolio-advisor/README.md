@@ -119,8 +119,8 @@ produces is personalized investment, tax, or legal advice. It can be wrong,
 including about tax rules that change every year. You are responsible for
 your own decisions: verify anything consequential, like large trades, Roth
 conversions, or retirement dates, before acting. Provided as is, without
-warranty, under the MIT license.
+warranty, under the Apache License 2.0.
 
 ## License
 
-MIT — see [LICENSE](../../LICENSE).
+Apache-2.0 — see [LICENSE](../../LICENSE) and [NOTICE](../../NOTICE).

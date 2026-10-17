@@ -38,4 +38,4 @@ If you change a hook, describe the inputs you tested it with in the PR.
 ## License
 
 By contributing, you agree your contributions are licensed under the
-[MIT License](LICENSE).
+[Apache License 2.0](LICENSE).
