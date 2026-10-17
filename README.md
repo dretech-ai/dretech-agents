@@ -53,6 +53,7 @@ agent's README for details.
 skills/<agent>/                   # standalone skill (source of truth)
 plugins/<agent>/                  # plugin: .claude-plugin/plugin.json, skills/<agent>/ (synced copy), commands/, hooks/, README.md
 scripts/sync-plugins.sh           # copy every skills/<agent> into plugins/<agent>/skills/<agent>
+scripts/package-skills.sh         # build dist/<agent>.skill (zip) for upload in the Claude apps
 ```
 
 ## Adding an agent
@@ -76,6 +77,9 @@ to an agent:
 2. Bump `version` in **both** `plugins/<agent>/.claude-plugin/plugin.json` and
    the agent's entry in `.claude-plugin/marketplace.json`.
 3. Users get it with `/plugin marketplace update dretech-ai`.
+4. To publish a release, run `scripts/package-skills.sh` and attach
+   `dist/<agent>.skill` to the GitHub release under that exact name, so
+   `releases/latest/download/<agent>.skill` always points at the newest one.
 
 Edit skills only under `skills/`. The copy under `plugins/` is overwritten by
 the sync script. Before committing, `scripts/sync-plugins.sh --check` should
