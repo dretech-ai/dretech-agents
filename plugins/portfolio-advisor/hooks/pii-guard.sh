@@ -48,6 +48,11 @@ exec perl -MJSON::PP -e '
                   || grep { m{(^|/)(portfolio|reviews)/} } @paths;
   exit 0 unless $in_workspace;
 
+  # travel/ belongs to vacation-planner, which keeps confirmation codes and
+  # runs its own guard.
+  my @real = grep { $_ ne "" } @paths;
+  exit 0 if @real && !grep { !m{(^|/)travel/} } @real;
+
   my @hits;
   for my $t (@texts) {
     while ($t =~ /(?<![\d.,\$])(\d[\d-]{6,}\d)(?![\d.,]*\d)/g) {
