@@ -1,0 +1,20 @@
+{
+  "name": "vacation-planner",
+  "version": "0.1.0",
+  "description": "Blunt, points-aware vacation planner: trips by tier and preferred brands, cash vs. points math, timeshare and prepaid-trip tracking, flexible dates, optional Perplexity search, and an affordability check against your portfolio-advisor files, with local markdown memory and a member-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://github.com/dretech-ai/dretech-agents/tree/main/plugins/vacation-planner",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "travel",
+    "vacation",
+    "points",
+    "miles",
+    "timeshare",
+    "personal-finance"
+  ]
+}

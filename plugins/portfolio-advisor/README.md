@@ -201,7 +201,8 @@ blocks digit runs that look like account numbers (8+ digits, optionally
 hyphenated). Dollar amounts, dates, date ranges, and masked numbers
 (`••••1234`) are allowed. It only runs when the working directory has
 `portfolio/profile.md`, or when the target path is under `portfolio/` or
-`reviews/`.
+`reviews/`. It skips files under `travel/`, which belong to the
+vacation-planner and its own guard.
 
 - Requires `bash` and `perl`, both preinstalled on macOS and most Linux
   distros. On Windows, install [Git for Windows](https://git-scm.com/downloads/win):
