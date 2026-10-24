@@ -1,0 +1,42 @@
+{
+  "name": "vacation-planner",
+  "version": "0.1.0",
+  "description": "Blunt, points-aware vacation planner: trips by tier and preferred brands, cash vs. points math, timeshare and prepaid-trip tracking, flexible dates, optional Perplexity search, and an affordability check against your portfolio-advisor files, with local markdown memory and a member-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://dretech.ai/agents.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "travel",
+    "vacation",
+    "points",
+    "miles",
+    "timeshare",
+    "personal-finance"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "Vacation Planner",
+    "shortDescription": "Plan trips around your points, timeshares, and budget",
+    "longDescription": "Plans vacations by tier (economy, standard, luxury) and your preferred hotel, airline, and rental car. Tracks loyalty points, timeshare and vacation-club contracts, prepaid trips, and travel credits; values every redemption in cents per point; offers flexible-date options; and checks each trip against your cash and emergency fund using your portfolio-advisor files. Can hand searches to Perplexity when connected. Never books anything. Keeps its memory in local markdown files and keeps member numbers out of the files it writes.",
+    "developerName": "dretech-ai",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://dretech.ai/agents.html",
+    "defaultPrompt": [
+      "Set up my vacation planner",
+      "Import the documents in travel/inbox/",
+      "Plan a trip",
+      "Can I afford this trip?"
+    ],
+    "brandColor": "#0369A1",
+    "screenshots": []
+  }
+}

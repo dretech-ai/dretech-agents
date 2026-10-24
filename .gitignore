@@ -3,6 +3,7 @@ portfolio/
 reviews/
 inbox/
 archive/
+travel/
 .DS_Store
 
 # Build output (release assets)

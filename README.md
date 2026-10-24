@@ -15,6 +15,7 @@ account needed.
 | Agent | What it does | Docs |
 |-------|--------------|------|
 | **portfolio-advisor** | Blunt, US-focused portfolio analysis tool. Reviews your statements for allocation drift, tax moves (TLH, asset location, Roth conversions), concentration risk, and retirement trajectory. Keeps its memory in local markdown and keeps account numbers out of the files it writes. Not a registered investment adviser. | [README](plugins/portfolio-advisor/README.md) |
+| **vacation-planner** | Blunt, points-aware vacation planner. Plans trips by tier (economy/standard/luxury) and your preferred hotel, airline, and car; values points in cents per point; tracks timeshare contracts, prepaid trips, and travel credits; offers flexible dates; can hand searches to Perplexity; and checks each trip against your portfolio-advisor files. Never books anything. | [README](plugins/vacation-planner/README.md) |
 
 ## Install
 
@@ -39,6 +40,7 @@ to trust a plugin's hooks before they run.
 ```
 /plugin marketplace add dretech-ai/dretech-agents
 /plugin install portfolio-advisor@dretech-ai
+/plugin install vacation-planner@dretech-ai
 ```
 
 ### In Codex CLI (terminal)
@@ -46,6 +48,7 @@ to trust a plugin's hooks before they run.
 ```bash
 codex plugin marketplace add dretech-ai/dretech-agents
 codex plugin add portfolio-advisor@dretech-ai
+codex plugin add vacation-planner@dretech-ai
 ```
 
 ### As standalone skills
@@ -53,7 +56,9 @@ codex plugin add portfolio-advisor@dretech-ai
 ```bash
 git clone https://github.com/dretech-ai/dretech-agents.git
 cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/    # Claude Code
+cp -r dretech-agents/skills/vacation-planner ~/.claude/skills/
 mkdir -p ~/.agents/skills && cp -r dretech-agents/skills/portfolio-advisor ~/.agents/skills/    # Codex
+cp -r dretech-agents/skills/vacation-planner ~/.agents/skills/
 ```
 
 On Windows (PowerShell):
@@ -62,6 +67,7 @@ On Windows (PowerShell):
 git clone https://github.com/dretech-ai/dretech-agents.git
 New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
 Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
+Copy-Item -Recurse dretech-agents\skills\vacation-planner "$HOME\.claude\skills\"
 ```
 
 See each agent's README for where it runs best.
