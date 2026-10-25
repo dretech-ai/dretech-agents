@@ -58,7 +58,7 @@ exec perl -MJSON::PP -e '
     # Card numbers written with spaces: 4-4-4-4, or Amex 4-6-5.
     while ($line =~ /(?<!\d)(\d{4} \d{4} \d{4} \d{4}|\d{4} \d{6} \d{5})(?!\d)/g) {
       (my $digits = $1) =~ s/ //g;
-      push @hits, "...." . substr($digits, -4);
+      push @hits, "ending " . substr($digits, -4);
     }
     while ($line =~ /(?<![\d.,\$])(\d[\d-]{6,}\d)(?![\d.,]*\d)/g) {
       my $run = $1;
@@ -68,7 +68,7 @@ exec perl -MJSON::PP -e '
       next if $run =~ /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;   # YYYYMMDD
       next if $run =~ /^(19|20)\d\d-(19|20)\d\d$/;                           # year range
       next if $run =~ /^$iso-$iso$/;                                         # ISO date range
-      push @hits, "...." . substr($digits, -4);
+      push @hits, "ending " . substr($digits, -4);
     }
   }
   exit 0 unless @hits;
