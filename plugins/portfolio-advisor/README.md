@@ -79,23 +79,9 @@ account-number hook. The CLI and the desktop app share this install.
 
 ### Option E: Standalone skill
 
-Just the skill, with no commands or hook. For Claude Code:
-
-```bash
-git clone https://github.com/dretech-ai/dretech-agents.git
-cp -r dretech-agents/skills/portfolio-advisor ~/.claude/skills/
-```
-
-On Windows (PowerShell):
-
-```powershell
-git clone https://github.com/dretech-ai/dretech-agents.git
-New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
-Copy-Item -Recurse dretech-agents\skills\portfolio-advisor "$HOME\.claude\skills\"
-```
-
-For Codex, copy it to `~/.agents/skills/` instead (create that folder if it
-doesn't exist) and restart Codex.
+Just the skill, with no commands or hook: see the
+[repository README](https://github.com/dretech-ai/dretech-agents#readme) for
+copy-into-place steps for Claude Code and Codex.
 
 ## Usage
 

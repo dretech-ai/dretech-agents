@@ -64,7 +64,7 @@ exec perl -MJSON::PP -e '
       next if $run =~ /^(19|20)\d\d-(19|20)\d\d$/;                             # year range
       my $iso = qr/(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
       next if $run =~ /^$iso-$iso$/;                                         # ISO date range
-      push @hits, "...." . substr($digits, -4);
+      push @hits, "ending " . substr($digits, -4);
     }
   }
   exit 0 unless @hits;
