@@ -1,6 +1,6 @@
 {
   "name": "portfolio-advisor",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Blunt, US-focused portfolio analysis tool: allocation, rebalancing, tax optimization, concentration risk, and retirement trajectory from your own statements, with local markdown memory and an account-number guard.",
   "author": {
     "name": "dretech-ai",
@@ -30,6 +30,7 @@
       "Write"
     ],
     "websiteURL": "https://dretech.ai/agents.html",
+    "privacyPolicyURL": "https://dretech.ai/privacy.html",
     "defaultPrompt": [
       "Set up my portfolio profile",
       "Review the statements in inbox/",

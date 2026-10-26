@@ -16,7 +16,7 @@ grades the previous review's recommendations, so ignored advice gets pushed
 back on instead of quietly repeated.
 
 It never logs in to your accounts. It only reads the documents you give it.
-See [Where your data goes](#where-your-data-goes).
+See [Privacy](#privacy).
 
 ## Install
 
@@ -145,7 +145,10 @@ inbox/                     # drop new statements here
 archive/YYYY-MM-DD/        # processed statements, moved verbatim
 ```
 
-## Where your data goes
+## Privacy
+
+There is no dretech-ai server: nothing you give the agent is sent to us. Full
+policy: [dretech.ai/privacy](https://dretech.ai/privacy.html).
 
 - **Your files stay local.** The profile, ledger, reviews, and archived
   statements are plain files in your folder. Nothing syncs anywhere.

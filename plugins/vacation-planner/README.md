@@ -104,7 +104,10 @@ line to `portfolio/profile.md` under *Known upcoming cash events*, so your next
 portfolio review accounts for it. That line is the only thing it ever writes
 in `portfolio/`.
 
-## Where your data goes
+## Privacy
+
+There is no dretech-ai server: nothing you give the agent is sent to us. Full
+policy: [dretech.ai/privacy](https://dretech.ai/privacy.html).
 
 - **Your files stay local.** Everything is plain markdown in your folder.
 - **What the AI reads goes to its provider** (Anthropic for Claude, OpenAI for
