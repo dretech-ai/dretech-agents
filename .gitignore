@@ -4,6 +4,7 @@ reviews/
 inbox/
 archive/
 travel/
+home/
 .DS_Store
 
 # Build output (release assets)

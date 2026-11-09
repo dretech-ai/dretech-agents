@@ -50,6 +50,12 @@ exec perl -MJSON::PP -e '
                   || grep { m{(^|/)travel/} } @paths;
   exit 0 unless $in_workspace;
 
+  # home/ belongs to home-improvement, which keeps license and quote numbers
+  # and runs its own guard. Matched relative to cwd: "home/" also appears in
+  # absolute paths (/home/user/...) on Linux.
+  my @rel = map { my $p = $_; $p =~ s{^\Q$cwd\E/}{} if $cwd ne ""; $p } grep { $_ ne "" } @paths;
+  exit 0 if @rel && !grep { !m{^(\./)?home/} } @rel;
+
   my $iso = qr/(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
   my @hits;
   for my $line (map { split /\n/ } @texts) {
