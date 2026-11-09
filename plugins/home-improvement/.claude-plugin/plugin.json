@@ -1,0 +1,21 @@
+{
+  "name": "home-improvement",
+  "version": "0.1.0",
+  "description": "Blunt home improvement planner: property and systems interview with a replacement forecast, contractor estimate import and side-by-side comparison, need-vs-want scoring with one ranked backlog across properties, resale value and cost-basis notes, and an affordability check against your portfolio-advisor files, with local markdown memory and an account-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://github.com/dretech-ai/dretech-agents/tree/main/plugins/home-improvement",
+  "privacyPolicyUrl": "https://dretech.ai/privacy.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "home",
+    "home-improvement",
+    "renovation",
+    "contractor",
+    "estimates",
+    "personal-finance"
+  ]
+}

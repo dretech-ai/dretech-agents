@@ -128,7 +128,8 @@ with `travel/profile.md`, or a path under `travel/`). It blocks 8+ digit runs
 (optionally hyphenated) and space-grouped card numbers, so member, contract,
 and card numbers get masked to `••••1234`. Lines labeled `Confirmation:` (or
 Conf, Record locator, Booking ref) are allowed, since you need those codes.
-Dates, date ranges, and dollar amounts are allowed.
+Dates, date ranges, and dollar amounts are allowed. Files under `home/` are
+skipped; they belong to the home-improvement planner and its own guard.
 
 - Requires `bash` and `perl` (on Windows, install Git for Windows).
 - Disable with `export VACATION_PLANNER_PII_GUARD=off`.

@@ -1,0 +1,43 @@
+{
+  "name": "home-improvement",
+  "version": "0.1.0",
+  "description": "Blunt home improvement planner: property and systems interview with a replacement forecast, contractor estimate import and side-by-side comparison, need-vs-want scoring with one ranked backlog across properties, resale value and cost-basis notes, and an affordability check against your portfolio-advisor files, with local markdown memory and an account-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://dretech.ai/agents.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "home",
+    "home-improvement",
+    "renovation",
+    "contractor",
+    "estimates",
+    "personal-finance"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "Home Improvement",
+    "shortDescription": "Compare estimates and rank home projects against your budget",
+    "longDescription": "Interviews you about each property and its systems (roof, HVAC, water heater, electrical, plumbing) and forecasts replacements. Imports contractor estimates and inspection reports from an inbox, normalizes bids line by line, and flags missing scope, low allowances, and risky terms. Scores every project as a need or a want and keeps one ranked backlog across your primary home, rentals, and vacation homes. Checks each project against your cash and emergency fund using your portfolio-advisor files, and notes resale value, cost basis, and current rebates. Never hires, signs, or pays anyone. Keeps its memory in local markdown files and keeps account numbers and addresses out of the files it writes.",
+    "developerName": "dretech-ai",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://dretech.ai/agents.html",
+    "privacyPolicyURL": "https://dretech.ai/privacy.html",
+    "defaultPrompt": [
+      "Set up my home improvement planner",
+      "Import the estimates in home/inbox/",
+      "Plan a project",
+      "What should I fix first?"
+    ],
+    "brandColor": "#B45309",
+    "screenshots": []
+  }
+}
