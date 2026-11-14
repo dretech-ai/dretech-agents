@@ -31,14 +31,20 @@ for skill_dir in "$root"/skills/*/; do
   fi
 done
 
-# The workspace README ships in every skill; the copies must stay identical.
-readmes=("$root"/skills/*/templates/workspace-readme.md)
-if [ -e "${readmes[0]}" ]; then
-  for f in "${readmes[@]:1}"; do
-    if ! cmp -s "${readmes[0]}" "$f"; then
-      echo "DRIFT ${f#"$root"/} differs from ${readmes[0]#"$root"/}" >&2
+# Shared files ship in every skill; the copies must exist and stay identical.
+for shared in templates/workspace-readme.md references/comms-handoff.md; do
+  ref=""
+  for skill_dir in "$root"/skills/*/; do
+    f="$skill_dir$shared"
+    if [ ! -e "$f" ]; then
+      echo "MISSING ${f#"$root"/} (shared file; copy it from another skill)" >&2
+      status=1
+    elif [ -z "$ref" ]; then
+      ref="$f"
+    elif ! cmp -s "$ref" "$f"; then
+      echo "DRIFT ${f#"$root"/} differs from ${ref#"$root"/}" >&2
       status=1
     fi
   done
-fi
+done
 exit $status

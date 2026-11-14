@@ -1,0 +1,43 @@
+{
+  "name": "communications",
+  "version": "0.1.0",
+  "description": "Communications agent for the dretech-ai agents: turns the trip, home project, and portfolio deadlines they queue into Google Calendar events, Google Tasks, and Gmail drafts after you confirm a preview. Drafts only (never sends), never deletes, with a local markdown log and an account-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://dretech.ai/agents.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "google-workspace",
+    "gmail",
+    "google-calendar",
+    "google-tasks",
+    "email-drafts",
+    "productivity"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "Communications",
+    "shortDescription": "Put your agents' dates and drafts into Google Calendar, Tasks, and Gmail",
+    "longDescription": "The one dretech-ai agent that talks to Google Workspace. The portfolio advisor, vacation planner, and home improvement planner queue requests in comms/outbox/ (trip dates, booking and cancellation deadlines, permit inspections, deposit due dates, estimated tax deadlines, questions for a contractor), and this agent previews them, checks for duplicates, and creates Google Calendar events, Google Tasks, and Gmail drafts after you confirm. It never sends email, never deletes, declines, or shares anything, and keeps a local markdown log of what it created. Works with a Google Workspace MCP server or the gws CLI, and falls back to .ics files and paste-ready drafts when nothing is connected.",
+    "developerName": "dretech-ai",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://dretech.ai/agents.html",
+    "privacyPolicyURL": "https://dretech.ai/privacy.html",
+    "defaultPrompt": [
+      "Set up my communications agent",
+      "Push what's in my comms outbox",
+      "What's on my agenda this week?",
+      "Draft an email to my contractor"
+    ],
+    "brandColor": "#6D28D9",
+    "screenshots": []
+  }
+}
