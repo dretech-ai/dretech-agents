@@ -9,6 +9,10 @@ simply have no folder here.
 | Portfolio advisor | `portfolio-advisor` | `portfolio/`, `reviews/`, `inbox/`, `archive/` | — |
 | Vacation planner | `vacation-planner` | `travel/` | `portfolio/` (read-only, plus one cash-event line) |
 | Home improvement | `home-improvement` | `home/` | `portfolio/` (read-only, plus one cash-event line) |
+| Communications | `communications` | `comms/` | The `travel/` or `home/` plan a request points to (read-only) |
+
+The other agents may also write request files to `comms/outbox/`, and nowhere
+else in `comms/`.
 
 ## Layout
 
@@ -24,12 +28,16 @@ simply have no folder here.
 │   ├── trips/                # One plan per trip
 │   ├── inbox/                # Drop points statements, timeshare contracts, travel credits
 │   └── archive/<YYYY-MM-DD>/
-└── home/
-    ├── profile.md  backlog.md
-    ├── properties/<slug>/    # property.md, systems.md, basis.md
-    ├── projects/             # One plan per project: YYYY-MM-<property>-<slug>.md
-    ├── inbox/                # Drop estimates, inspection reports, invoices, water tests
-    └── archive/<YYYY-MM-DD>/
+├── home/
+│   ├── profile.md  backlog.md
+│   ├── properties/<slug>/    # property.md, systems.md, basis.md
+│   ├── projects/             # One plan per project: YYYY-MM-<property>-<slug>.md
+│   ├── inbox/                # Drop estimates, inspection reports, invoices, water tests
+│   └── archive/<YYYY-MM-DD>/
+└── comms/
+    ├── profile.md  log.md    # Google account defaults; what was created in Google
+    ├── outbox/               # Calendar, task, and email-draft requests queued by any agent
+    └── done/<YYYY-MM-DD>/    # Processed requests
 ```
 
 ## Always work from this folder
@@ -49,6 +57,7 @@ Skip any agent that's already set up:
 - `/portfolio-advisor:init-portfolio`
 - `/vacation-planner:init-travel`
 - `/home-improvement:init-home`
+- `/communications:init-comms`
 
 ## Daily use
 
@@ -62,6 +71,8 @@ Skip any agent that's already set up:
 | Import estimates / reports from `home/inbox/` | `/home-improvement:import-home` |
 | Plan a home project | `/home-improvement:plan-project` |
 | Re-rank the home backlog against cash | `/home-improvement:home-backlog` |
+| Push queued events, tasks, and drafts to Google | `/communications:outbox` |
+| See this week's events, tasks, drafts, and queue | `/communications:agenda` |
 
 After processing, files move from each `inbox/` to that inbox's dated `archive/` folder.
 
@@ -71,6 +82,10 @@ After processing, files move from each `inbox/` to that inbox's dated `archive/`
   except for one line each under **Known upcoming cash events** in
   `portfolio/profile.md`, added only after you confirm.
 - The travel and home agents never read or write each other's folders.
+- Only the communications agent talks to Google. The others queue requests in
+  `comms/outbox/` after you say yes. The communications agent shows you a
+  preview before it creates anything, never sends email (drafts only), and
+  never deletes anything in your Google account.
 - Affordability checks use the cash in `portfolio/ledger.md`, the emergency-fund
   target, and the upcoming cash events. Keep the ledger current or the checks go stale.
 
@@ -85,3 +100,5 @@ After processing, files move from each `inbox/` to that inbox's dated `archive/`
   Properties are stored as a nickname plus city, state, and ZIP.
 - Everything the agents read is sent to the model provider under your account's data
   terms. Web searches include only the topic and the city or ZIP.
+- `comms/log.md` keeps titles, dates, and Google IDs, not email bodies. Email threads
+  the communications agent reads to draft a reply are sent to the model provider too.

@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+# communications PII guard (PreToolUse on Write|Edit|MultiEdit in Claude Code,
+# apply_patch in Codex).
+#
+# Blocks a file write when the new content contains a digit run that looks
+# like an account, loan, policy, member, or card number. Only active inside a
+# comms workspace (a cwd with comms/profile.md) or when the target path is
+# under comms/, so it stays out of the way in unrelated projects. This also
+# covers request files the other agents write to comms/outbox/.
+#
+# Flagged:  8+ digits, optionally hyphenated (123456789, 1234-5678-9012), and
+#           space-grouped card numbers (4111 1111 1111 1111)
+# Allowed:  lines labeled Confirmation / Quote # / Estimate # / Invoice # /
+#           Permit / License / Phone / Tel / Event ID / Task ID / Draft ID /
+#           Google ID, digits glued to letters (Google IDs such as r-81234567890),
+#           dollar amounts ($1,234,567.89), decimals, ISO dates (2026-10-17),
+#           YYYYMMDD dates, year ranges (2026-2036), ISO date ranges
+#           (2026-01-01-2026-12-31), masked numbers (••••1234)
+# Disable:  COMMUNICATIONS_PII_GUARD=off
+#
+# Exit 2 blocks the tool call and sends stderr back to the model.
+
+[ "${COMMUNICATIONS_PII_GUARD:-on}" = "off" ] && exit 0
+
+# No perl (e.g. Windows without Git for Windows): say so instead of silently
+# doing nothing. Exit 1 is a non-blocking error, so writes still go through.
+if ! command -v perl >/dev/null 2>&1; then
+  echo "communications PII guard is OFF: perl not found (on Windows, install Git for Windows)" >&2
+  exit 1
+fi
+
+exec perl -MJSON::PP -e '
+  local $/;
+  my $in = eval { decode_json(<STDIN>) } or exit 0;
+  my $ti = $in->{tool_input} || {};
+  my $cwd = $in->{cwd} // "";
+  my @paths = ($ti->{file_path} // "");
+  my @texts = grep { defined } ($ti->{content}, $ti->{new_string});
+  push @texts, map { $_->{new_string} } @{ $ti->{edits} || [] };
+
+  # Codex edits files with apply_patch: the whole patch is in tool_input.command.
+  # Check its target paths and added ("+") lines.
+  if (($in->{tool_name} // "") eq "apply_patch") {
+    my $patch = $ti->{command} // "";
+    $patch = join("\n", @$patch) if ref $patch eq "ARRAY";
+    @paths = $patch =~ /^\*\*\* (?:Add File|Update File|Move to): (.+?)\s*$/mg;
+    push @texts, join("\n", $patch =~ /^\+(.*)$/mg);
+  }
+  tr{\\}{/} for $cwd, @paths;   # Windows paths: C:\x\comms -> C:/x/comms
+  my $path = join(", ", grep { $_ ne "" } @paths);
+
+  # Match on paths relative to cwd: "home/" also appears in absolute paths
+  # (/home/user/...) on Linux.
+  my @rel = map { my $p = $_; $p =~ s{^\Q$cwd\E/}{} if $cwd ne ""; $p } grep { $_ ne "" } @paths;
+
+  my $in_workspace = ($cwd ne "" && -e "$cwd/comms/profile.md")
+                  || grep { m{(^|/)comms/} } @rel;
+  exit 0 unless $in_workspace;
+
+  # portfolio/, reviews/, travel/, and home/ belong to the sibling agents, which
+  # run their own guards.
+  exit 0 if @rel && !grep { !m{^(\./)?(portfolio|reviews|travel|home)/} } @rel;
+
+  my $iso = qr/(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
+  my @hits;
+  for my $line (map { split /\n/ } @texts) {
+    # Reference numbers the user needs, contractor phone numbers, and Google
+    # object IDs are kept on purpose.
+    next if $line =~ /\b(license|lic\b|quote ?(#|no\b|number)|estimate ?(#|no\b|number)|invoice ?(#|no\b|number)|permit|confirmation|conf\b|record locator|booking ref|contract ?(#|no\b|number)|proposal ?(#|no\b|number)|phone|tel\b|mobile|(event|task|draft|thread|message|google)[ _]?id)/i;
+    # Card numbers written with spaces: 4-4-4-4, or Amex 4-6-5.
+    while ($line =~ /(?<!\d)(\d{4} \d{4} \d{4} \d{4}|\d{4} \d{6} \d{5})(?!\d)/g) {
+      (my $digits = $1) =~ s/ //g;
+      push @hits, "ending " . substr($digits, -4);
+    }
+    # Digits glued to letters (r8123456789, r-8123456789, abc123456789) are
+    # opaque IDs, not account numbers.
+    while ($line =~ /(?<![\d.,\$A-Za-z_])(?<![A-Za-z]-)(\d[\d-]{6,}\d)(?![\d.,]*\d)(?![A-Za-z_])/g) {
+      my $run = $1;
+      (my $digits = $run) =~ s/-//g;
+      next if length($digits) < 8;
+      next if $run =~ /^$iso$/;                                               # ISO date
+      next if $run =~ /^(19|20)\d\d(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;   # YYYYMMDD
+      next if $run =~ /^(19|20)\d\d-(19|20)\d\d$/;                           # year range
+      next if $run =~ /^$iso-$iso$/;                                         # ISO date range
+      push @hits, "ending " . substr($digits, -4);
+    }
+  }
+  exit 0 unless @hits;
+
+  print STDERR "communications PII guard: blocked write to $path\n",
+    "Found digit run(s) that look like account, loan, policy, member, or card numbers: ", join(", ", @hits), "\n",
+    "Drop them and use a label (\"Chase Sapphire\", \"State Farm homeowners\"). ",
+    "If this is a confirmation, quote, invoice, permit, or license number, a phone number, or a Google ID, put it on a line labeled ",
+    "\"Confirmation:\", \"Quote #:\", \"Invoice #:\", \"Permit:\", \"License:\", \"Phone:\", or \"Google ID:\".\n";
+  exit 2;
+'

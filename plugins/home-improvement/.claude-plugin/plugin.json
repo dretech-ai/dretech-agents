@@ -1,6 +1,6 @@
 {
   "name": "home-improvement",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Blunt home improvement planner: property and systems interview with a replacement forecast, contractor estimate import and side-by-side comparison, need-vs-want scoring with one ranked backlog across properties, resale value and cost-basis notes, and an affordability check against your portfolio-advisor files, with local markdown memory and an account-number guard.",
   "author": {
     "name": "dretech-ai",

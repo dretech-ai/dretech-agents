@@ -102,6 +102,7 @@ home/
 └── archive/<YYYY-MM-DD>/    # Processed source documents, moved verbatim
 portfolio/                   # Owned by portfolio-advisor. Read-only, except one line (see finance-link.md)
 travel/                      # Owned by vacation-planner. Never read or written.
+comms/outbox/                # Owned by communications. Write new request files only (see comms-handoff.md)
 ```
 
 `profile.md`, `backlog.md`, and each property's `property.md` and
@@ -113,8 +114,8 @@ Never create a workspace implicitly. A question asked from the wrong folder
 must not start a new set of folders there.
 
 - **`home/profile.md` exists here:** this is the workspace. Carry on.
-- **Not here, but `portfolio/profile.md` or `travel/profile.md` is** (a
-  sibling agent's workspace): this is the user's finance folder. Offer to set
+- **Not here, but `portfolio/profile.md`, `travel/profile.md`, or
+  `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set
   up `home/` here, and create it only after a yes.
 - **None of them here:** create nothing. Show the absolute path of the current
   folder and say plainly that there's no finance workspace in it. Check the
@@ -151,6 +152,15 @@ files.
 - **Financial impact, value, and tax:** [references/finance-link.md](references/finance-link.md).
 - **System lifespans and cost ranges:** [references/lifecycle-data.md](references/lifecycle-data.md)
   as a fallback; search for current local figures first.
+- **Hand-offs to comms:** when a project plan is saved or a bid comparison
+  raises questions, if `comms/profile.md` exists, offer to queue: an email
+  draft to the contractor (questions on the bid, follow-up), scheduled work
+  days and permit inspections as calendar events, and deposit due dates, bid
+  expirations, rebate deadlines, and systems due for replacement within 12
+  months as Google Tasks. Follow
+  [references/comms-handoff.md](references/comms-handoff.md). Drafts go only
+  to the contractor address on their estimate. No balances, loan numbers, or
+  street addresses in a request.
 
 ## Operating principles
 

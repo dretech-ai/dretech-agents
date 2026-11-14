@@ -95,6 +95,7 @@ travel/
 ├── inbox/            # User drops statements, contracts, confirmations here
 └── archive/<YYYY-MM-DD>/   # Processed source documents, moved verbatim
 portfolio/            # Owned by portfolio-advisor. Read-only, except one line (see finance-link.md)
+comms/outbox/         # Owned by communications. Write new request files only (see comms-handoff.md)
 ```
 
 `profile.md`, `points.md`, `point-values.md`, and `holdings.md` are your
@@ -106,8 +107,8 @@ Never create a workspace implicitly. A question asked from the wrong folder
 must not start a new set of folders there.
 
 - **`travel/profile.md` exists here:** this is the workspace. Carry on.
-- **Not here, but `portfolio/profile.md` or `home/profile.md` is** (a sibling
-  agent's workspace): this is the user's finance folder. Offer to set up
+- **Not here, but `portfolio/profile.md`, `home/profile.md`, or
+  `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set up
   `travel/` here, and create it only after a yes.
 - **None of them here:** create nothing. Show the absolute path of the current
   folder and say plainly that there's no finance workspace in it. Check the
@@ -142,6 +143,13 @@ files.
 - **Financial impact:** [references/finance-link.md](references/finance-link.md).
 - **Point values:** take cpp from `travel/point-values.md`, refreshed per
   [references/point-data.md](references/point-data.md).
+- **Hand-offs to comms:** when a trip plan is saved, if `comms/profile.md`
+  exists, offer to queue the trip dates as a calendar event and its deadlines
+  as Google Tasks: booking window opens, points transfers, cancellation and
+  refund deadlines, timeshare reservation deadlines, and expiring
+  certificates. Follow [references/comms-handoff.md](references/comms-handoff.md).
+  Never put member numbers or balances in a request; a `Confirmation:` line is
+  fine.
 
 ## Operating principles
 

@@ -96,6 +96,7 @@ portfolio/
 reviews/                   # One dated report per review: YYYY-MM-DD-<slug>.md
 inbox/                     # User drops new statements here
 archive/<YYYY-MM-DD>/      # Processed source documents, moved verbatim
+comms/outbox/              # Owned by communications. Write new request files only (see references/comms-handoff.md)
 ```
 
 These three `portfolio/` files are your memory. Load them at the start of
@@ -107,8 +108,8 @@ Never create a workspace implicitly. A question asked from the wrong folder
 must not start a new set of folders there.
 
 - **`portfolio/profile.md` exists here:** this is the workspace. Carry on.
-- **Not here, but `travel/profile.md` or `home/profile.md` is** (a sibling
-  agent's workspace): this is the user's finance folder. Offer to set up
+- **Not here, but `travel/profile.md`, `home/profile.md`, or
+  `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set up
   `portfolio/` here, and create it only after a yes.
 - **None of them here:** create nothing. Show the absolute path of the current
   folder and say plainly that there's no finance workspace in it. Check the
@@ -138,6 +139,13 @@ files.
   grade prior recommendations.
 - **Benchmarks:** see [references/benchmarks.md](references/benchmarks.md) —
   S&P 500 (VOO) plus the target-date fund matching the retirement year.
+- **Hand-offs to comms:** at the end of a review, if `comms/profile.md`
+  exists, offer to queue dated follow-ups as Google Tasks: quarterly
+  estimated tax due dates, the RMD deadline, contribution deadlines, the date a
+  wash-sale window closes, and the next review date. Follow
+  [references/comms-handoff.md](references/comms-handoff.md). Tasks only:
+  never queue an email draft, and never put a balance, holding, or dollar
+  figure in a request.
 
 ## Operating principles
 
