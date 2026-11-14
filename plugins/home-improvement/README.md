@@ -70,6 +70,11 @@ your finances:
 /home-backlog [property]  # re-rank everything and show what fits the next 12 months
 ```
 
+Always open it from that folder. It creates files only in a folder that
+already holds a workspace (its own or a sibling agent's). Anywhere else it
+stops and asks, so a question asked from the wrong folder doesn't start a
+second set of folders.
+
 In Codex, or without the plugin, just ask: *"set up my home improvement
 planner"*, *"compare the roofing bids in my inbox"*, *"what should I fix
 first?"*.

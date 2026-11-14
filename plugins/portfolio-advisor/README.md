@@ -107,6 +107,11 @@ mkdir "$HOME\finances"; cd "$HOME\finances"; claude
 /update-tax-data [year]  # refresh brackets, contribution limits, IRMAA → portfolio/tax-figures.md
 ```
 
+Always open it from that folder. It creates files only in a folder that
+already holds a workspace. Anywhere else it stops and asks, so a question
+asked from the wrong folder doesn't start a second set of folders. Setup also
+writes a `README.md` to the folder that maps out every agent's files.
+
 If another plugin or a built-in command also uses `/review`, call these by
 their namespaced names: `/portfolio-advisor:review`,
 `/portfolio-advisor:init-portfolio`, and `/portfolio-advisor:update-tax-data`.

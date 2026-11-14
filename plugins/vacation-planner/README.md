@@ -74,6 +74,11 @@ your finances:
 /update-point-values      # refresh cents-per-point valuations → travel/point-values.md
 ```
 
+Always open it from that folder. It creates files only in a folder that
+already holds a workspace (its own or the portfolio advisor's). Anywhere else
+it stops and asks, so a question asked from the wrong folder doesn't start a
+second set of folders.
+
 In Codex, or without the plugin, just ask: *"set up my vacation planner"*,
 *"import my timeshare contract"*, *"plan a trip to Maui in March"*.
 

@@ -30,4 +30,15 @@ for skill_dir in "$root"/skills/*/; do
     echo "synced $name"
   fi
 done
+
+# The workspace README ships in every skill; the copies must stay identical.
+readmes=("$root"/skills/*/templates/workspace-readme.md)
+if [ -e "${readmes[0]}" ]; then
+  for f in "${readmes[@]:1}"; do
+    if ! cmp -s "${readmes[0]}" "$f"; then
+      echo "DRIFT ${f#"$root"/} differs from ${readmes[0]#"$root"/}" >&2
+      status=1
+    fi
+  done
+fi
 exit $status

@@ -97,9 +97,35 @@ travel/
 portfolio/            # Owned by portfolio-advisor. Read-only, except one line (see finance-link.md)
 ```
 
-If `travel/` doesn't exist, create it from the templates in `templates/` (next
-to this file) before starting. `profile.md`, `points.md`, `point-values.md`,
-and `holdings.md` are your memory — load them at the start of every session.
+`profile.md`, `points.md`, `point-values.md`, and `holdings.md` are your
+memory. Load them at the start of every session.
+
+### Workspace check (every session, before reading or writing anything)
+
+Never create a workspace implicitly. A question asked from the wrong folder
+must not start a new set of folders there.
+
+- **`travel/profile.md` exists here:** this is the workspace. Carry on.
+- **Not here, but `portfolio/profile.md` or `home/profile.md` is** (a sibling
+  agent's workspace): this is the user's finance folder. Offer to set up
+  `travel/` here, and create it only after a yes.
+- **None of them here:** create nothing. Show the absolute path of the current
+  folder and say plainly that there's no finance workspace in it. Check the
+  parent folders for `travel/profile.md` or `portfolio/profile.md`, and name
+  the folder if you find one. Ask whether to switch to the existing folder
+  (`cd` there, or connect it in the desktop app) or to start a new workspace
+  here. Start one only after an explicit yes. If the user starts one without
+  `portfolio/`, tell them the affordability check is off.
+- **If the folder looks wrong for personal data,** warn before setting up,
+  even when the user says yes. Wrong means the user's home folder itself, or a
+  code repo with source files in it.
+
+To set up (after a yes, or through `/vacation-planner:init-travel`), create
+`travel/`, `travel/trips/`, `travel/inbox/`, and `travel/archive/`. Copy
+`profile.md`, `points.md`, and `holdings.md` from `templates/` (next to this
+file) into `travel/`. If there's no `README.md` at the workspace root, copy
+`templates/workspace-readme.md` there as `README.md`. Never overwrite existing
+files.
 
 ## Workflow
 
