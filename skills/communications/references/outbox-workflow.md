@@ -27,8 +27,8 @@ Check it against [comms-handoff.md](comms-handoff.md). Mark it **needs fix**
 - A draft's `to` address doesn't appear in the `source` file or in the
   user's own words. It needs the user to confirm the address.
 
-**Check dates against the source.** If `source` is under `travel/` or
-`home/`, open it and confirm the request's dates match the plan. If they
+**Check dates against the source.** If `source` is under `travel/`,
+`home/`, or `insurance/`, open it and confirm the request's dates match the plan. If they
 don't, flag it. Never open a source under `portfolio/` or `reviews/`; trust
 the dates in the request.
 

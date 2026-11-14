@@ -1,0 +1,43 @@
+{
+  "name": "insurance-advisor",
+  "version": "0.1.0",
+  "description": "Blunt insurance advisor: household and policy interview, declarations page and quote import, under- and over-coverage checks across home, auto, umbrella, life, disability, health, Medicare, LTC, and specialty lines, price analysis with deductible break-even and like-for-like quote comparison, and a renewal calendar that says when to shop, checked against your portfolio-advisor and home-improvement files, with local markdown memory and a policy-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://dretech.ai/agents.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "insurance",
+    "coverage",
+    "premiums",
+    "quotes",
+    "medicare",
+    "personal-finance"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks/codex-hooks.json",
+  "interface": {
+    "displayName": "Insurance Advisor",
+    "shortDescription": "Find coverage gaps, overpriced policies, and when to shop",
+    "longDescription": "Interviews you about your household and every policy you hold, or reads your declarations pages, renewal notices, and quotes from an inbox. Checks home, auto, umbrella, life, disability, health, Medicare, long-term care, and specialty coverage for gaps and for coverage you're paying for but don't need. Compares liability limits with your net worth and deductibles with your emergency fund using your portfolio-advisor files, and reads property facts and roof age from your home-improvement files. Tracks premium history, benchmarks prices, works out deductible break-evens, compares quotes like for like, and keeps a renewal calendar that says when to shop. Never contacts an insurer, and never buys, changes, or cancels a policy. Keeps its memory in local markdown files and keeps policy numbers, member IDs, and VINs out of the files it writes.",
+    "developerName": "dretech-ai",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://dretech.ai/agents.html",
+    "privacyPolicyURL": "https://dretech.ai/privacy.html",
+    "defaultPrompt": [
+      "Set up my insurance advisor",
+      "Import the dec pages in insurance/inbox/",
+      "Review my coverage",
+      "Which policies should I shop this year?"
+    ],
+    "brandColor": "#BE123C",
+    "screenshots": []
+  }
+}

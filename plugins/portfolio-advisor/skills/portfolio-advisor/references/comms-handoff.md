@@ -39,6 +39,8 @@ names the old file.
 | home-improvement | draft | Follow-up or questions to a contractor about a bid |
 | home-improvement | event | Scheduled work days, permit inspection, walkthrough |
 | home-improvement | task | Deposit or progress payment due, bid expires, system replace-by within 12 months, rebate application deadline |
+| insurance-advisor | draft | Re-quote request or coverage-change questions to the user's agent or broker |
+| insurance-advisor | task | Shop-by date (~45 days before a renewal), non-renewal effective date, premium due, open enrollment, Medicare enrollment windows, Medigap open-enrollment end, term-conversion deadline |
 | portfolio-advisor | task | Quarterly estimated tax due, RMD deadline, contribution deadline, rebalance or tax-loss-harvest review date, wash-sale window ends |
 
 The portfolio advisor never queues an email draft. No agent puts balances,
@@ -47,13 +49,13 @@ holdings, income, or portfolio figures in any request.
 ## File name and format
 
 `comms/outbox/YYYY-MM-DD-<agent>-<slug>.md`. Use today's date, the sending
-agent's short name (`portfolio`, `travel`, or `home`), and a short
+agent's short name (`portfolio`, `travel`, `home`, or `insurance`), and a short
 lowercase-hyphenated slug. Example:
 `comms/outbox/2026-11-14-travel-maui-trip-dates.md`.
 
 ```markdown
 ---
-from: vacation-planner            # portfolio-advisor | vacation-planner | home-improvement
+from: vacation-planner            # portfolio-advisor | vacation-planner | home-improvement | insurance-advisor
 type: event                       # event | task | draft
 source: travel/trips/2027-03-maui.md
 created: 2026-11-14
@@ -85,9 +87,9 @@ it.
 
 ## Content rules (all requests)
 
-- No account, loan, policy, member, or card numbers. Labeled reference numbers
-  are fine on their own line: `Confirmation:`, `Quote #:`, `Estimate #:`,
-  `Invoice #:`, `Permit:`, `License:`.
+- No account, loan, policy, member, or card numbers, and no VINs. Labeled
+  reference numbers are fine on their own line: `Confirmation:`, `Quote #:`,
+  `Estimate #:`, `Invoice #:`, `Permit:`, `License:`, `Claim #:`.
 - No street addresses of the user's own homes. City, state, and ZIP, or a
   property nickname ("main house"), are fine. A business's address is fine
   when the user needs it to get there.

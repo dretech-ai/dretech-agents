@@ -10,27 +10,34 @@
       "name": "portfolio-advisor",
       "source": "./plugins/portfolio-advisor",
       "description": "Blunt, US-focused portfolio analysis tool with local markdown memory and an account-number guard.",
-      "version": "0.1.12",
+      "version": "0.1.13",
       "category": "productivity"
     },
     {
       "name": "vacation-planner",
       "source": "./plugins/vacation-planner",
       "description": "Blunt, points-aware vacation planner with timeshare tracking, optional Perplexity search, and a portfolio affordability check.",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "category": "productivity"
     },
     {
       "name": "home-improvement",
       "source": "./plugins/home-improvement",
       "description": "Blunt home improvement planner: estimate comparison, need-vs-want backlog across properties, and a portfolio affordability check.",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "category": "productivity"
     },
     {
       "name": "communications",
       "source": "./plugins/communications",
       "description": "Communications agent: turns what the other agents queue into Google Calendar events, Google Tasks, and Gmail drafts after you confirm. Never sends or deletes.",
+      "version": "0.1.1",
+      "category": "productivity"
+    },
+    {
+      "name": "insurance-advisor",
+      "source": "./plugins/insurance-advisor",
+      "description": "Blunt insurance advisor: coverage gaps and over-coverage, price and quote comparison, and when to shop, checked against your portfolio and home files.",
       "version": "0.1.0",
       "category": "productivity"
     }

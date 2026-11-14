@@ -1,6 +1,6 @@
 {
   "name": "communications",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Communications agent for the dretech-ai agents: turns the trip, home project, and portfolio deadlines they queue into Google Calendar events, Google Tasks, and Gmail drafts after you confirm a preview. Drafts only (never sends), never deletes, with a local markdown log and an account-number guard.",
   "author": {
     "name": "dretech-ai",

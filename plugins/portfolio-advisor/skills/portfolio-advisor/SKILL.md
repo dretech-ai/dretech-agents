@@ -97,6 +97,7 @@ reviews/                   # One dated report per review: YYYY-MM-DD-<slug>.md
 inbox/                     # User drops new statements here
 archive/<YYYY-MM-DD>/      # Processed source documents, moved verbatim
 comms/outbox/              # Owned by communications. Write new request files only (see references/comms-handoff.md)
+travel/  home/  insurance/ # Owned by the sibling agents. Never read or written.
 ```
 
 These three `portfolio/` files are your memory. Load them at the start of
@@ -108,8 +109,8 @@ Never create a workspace implicitly. A question asked from the wrong folder
 must not start a new set of folders there.
 
 - **`portfolio/profile.md` exists here:** this is the workspace. Carry on.
-- **Not here, but `travel/profile.md`, `home/profile.md`, or
-  `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set up
+- **Not here, but `travel/profile.md`, `home/profile.md`,
+  `insurance/profile.md`, or `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set up
   `portfolio/` here, and create it only after a yes.
 - **None of them here:** create nothing. Show the absolute path of the current
   folder and say plainly that there's no finance workspace in it. Check the

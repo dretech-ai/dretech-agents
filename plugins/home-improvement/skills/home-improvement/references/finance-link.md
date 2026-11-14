@@ -92,7 +92,11 @@ cash-only verdict.
   must be applied for before work starts; say so in the booking-steps order.
 - **Insurance:** note if the project may lower premiums (new roof, impact
   windows, water-leak sensors, updated electrical) or needs a policy update
-  (added square footage, pool, higher replacement cost).
+  (added square footage, pool, higher replacement cost). If
+  `insurance/profile.md` exists, tell the user to run
+  `/insurance-advisor:review-coverage` once the work is done (or before it
+  starts, for added square footage or a pool). Never read or write
+  `insurance/`.
 
 ## Logging the cash event
 

@@ -11,8 +11,8 @@ current directory.
 2. Confirm the location before creating anything. Show the absolute path of
    the current folder and ask the user to confirm it's the folder their other
    dretech-ai agents use. If a parent folder already has `comms/profile.md`
-   or a sibling profile (`portfolio/`, `travel/`, `home/`), name it and
-   suggest switching there instead. If no sibling profile is here, say the
+   or a sibling profile (`portfolio/`, `travel/`, `home/`, `insurance/`),
+   name it and suggest switching there instead. If no sibling profile is here, say the
    other agents won't queue anything until they're set up in this folder,
    and ask again whether it's the right one. Warn if this is the home folder
    itself or a code repo with source files.

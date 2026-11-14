@@ -50,11 +50,12 @@ exec perl -MJSON::PP -e '
                   || grep { m{(^|/)travel/} } @paths;
   exit 0 unless $in_workspace;
 
-  # home/ belongs to home-improvement and comms/ to communications; both keep
+  # home/ belongs to home-improvement, insurance/ to insurance-advisor, and
+  # comms/ to communications; all keep
   # labeled reference numbers and run their own guards. Matched relative to cwd: "home/" also appears in
   # absolute paths (/home/user/...) on Linux.
   my @rel = map { my $p = $_; $p =~ s{^\Q$cwd\E/}{} if $cwd ne ""; $p } grep { $_ ne "" } @paths;
-  exit 0 if @rel && !grep { !m{^(\./)?(home|comms)/} } @rel;
+  exit 0 if @rel && !grep { !m{^(\./)?(home|comms|insurance)/} } @rel;
 
   my $iso = qr/(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
   my @hits;

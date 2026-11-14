@@ -56,9 +56,9 @@ exec perl -MJSON::PP -e '
                   || grep { m{^(\./)?home/} } @rel;
   exit 0 unless $in_workspace;
 
-  # travel/, portfolio/, reviews/, and comms/ belong to the sibling agents,
+  # travel/, portfolio/, reviews/, comms/, and insurance/ belong to the sibling agents,
   # which run their own guards.
-  exit 0 if @rel && !grep { !m{^(\./)?(travel|portfolio|reviews|comms)/} } @rel;
+  exit 0 if @rel && !grep { !m{^(\./)?(travel|portfolio|reviews|comms|insurance)/} } @rel;
 
   my $iso = qr/(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])/;
   my @hits;

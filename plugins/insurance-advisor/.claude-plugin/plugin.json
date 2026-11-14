@@ -1,0 +1,21 @@
+{
+  "name": "insurance-advisor",
+  "version": "0.1.0",
+  "description": "Blunt insurance advisor: household and policy interview, declarations page and quote import, under- and over-coverage checks across home, auto, umbrella, life, disability, health, Medicare, LTC, and specialty lines, price analysis with deductible break-even and like-for-like quote comparison, and a renewal calendar that says when to shop, checked against your portfolio-advisor and home-improvement files, with local markdown memory and a policy-number guard.",
+  "author": {
+    "name": "dretech-ai",
+    "url": "https://github.com/dretech-ai"
+  },
+  "homepage": "https://github.com/dretech-ai/dretech-agents/tree/main/plugins/insurance-advisor",
+  "privacyPolicyUrl": "https://dretech.ai/privacy.html",
+  "repository": "https://github.com/dretech-ai/dretech-agents",
+  "license": "Apache-2.0",
+  "keywords": [
+    "insurance",
+    "coverage",
+    "premiums",
+    "quotes",
+    "medicare",
+    "personal-finance"
+  ]
+}

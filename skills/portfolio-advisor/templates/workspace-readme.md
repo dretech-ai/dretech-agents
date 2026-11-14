@@ -9,7 +9,8 @@ simply have no folder here.
 | Portfolio advisor | `portfolio-advisor` | `portfolio/`, `reviews/`, `inbox/`, `archive/` | — |
 | Vacation planner | `vacation-planner` | `travel/` | `portfolio/` (read-only, plus one cash-event line) |
 | Home improvement | `home-improvement` | `home/` | `portfolio/` (read-only, plus one cash-event line) |
-| Communications | `communications` | `comms/` | The `travel/` or `home/` plan a request points to (read-only) |
+| Insurance advisor | `insurance-advisor` | `insurance/` | `portfolio/` and `home/properties/` (read-only, plus one cash-event line) |
+| Communications | `communications` | `comms/` | The `travel/`, `home/`, or `insurance/` file a request points to (read-only) |
 
 The other agents may also write request files to `comms/outbox/`, and nowhere
 else in `comms/`.
@@ -34,6 +35,12 @@ else in `comms/`.
 │   ├── projects/             # One plan per project: YYYY-MM-<property>-<slug>.md
 │   ├── inbox/                # Drop estimates, inspection reports, invoices, water tests
 │   └── archive/<YYYY-MM-DD>/
+├── insurance/
+│   ├── profile.md  policies.md
+│   ├── policies/             # One file per policy: coverages, premium history, quotes
+│   ├── reviews/              # Dated coverage reviews
+│   ├── inbox/                # Drop declarations pages, renewal notices, quotes
+│   └── archive/<YYYY-MM-DD>/
 └── comms/
     ├── profile.md  log.md    # Google account defaults; what was created in Google
     ├── outbox/               # Calendar, task, and email-draft requests queued by any agent
@@ -57,6 +64,7 @@ Skip any agent that's already set up:
 - `/portfolio-advisor:init-portfolio`
 - `/vacation-planner:init-travel`
 - `/home-improvement:init-home`
+- `/insurance-advisor:init-insurance`
 - `/communications:init-comms`
 
 ## Daily use
@@ -71,6 +79,9 @@ Skip any agent that's already set up:
 | Import estimates / reports from `home/inbox/` | `/home-improvement:import-home` |
 | Plan a home project | `/home-improvement:plan-project` |
 | Re-rank the home backlog against cash | `/home-improvement:home-backlog` |
+| Import dec pages / quotes from `insurance/inbox/` | `/insurance-advisor:import-insurance` |
+| Review coverage, price, and gaps | `/insurance-advisor:review-coverage` |
+| See renewals and what to shop | `/insurance-advisor:renewals` |
 | Push queued events, tasks, and drafts to Google | `/communications:outbox` |
 | See this week's events, tasks, drafts, and queue | `/communications:agenda` |
 
@@ -78,10 +89,13 @@ After processing, files move from each `inbox/` to that inbox's dated `archive/`
 
 ## Cross-agent rules
 
-- `portfolio/` belongs to the portfolio advisor. The other two agents only read it,
-  except for one line each under **Known upcoming cash events** in
+- `portfolio/` belongs to the portfolio advisor. The travel, home, and insurance agents
+  only read it, except for one line each under **Known upcoming cash events** in
   `portfolio/profile.md`, added only after you confirm.
-- The travel and home agents never read or write each other's folders.
+- The travel and home agents never read or write each other's folders. The insurance
+  agent reads `home/profile.md` and `home/properties/` (year built, square feet, roof
+  and system ages) but never writes there, and never reads `travel/`. No other agent
+  reads `insurance/`, except communications reading the file a request points to.
 - Only the communications agent talks to Google. The others queue requests in
   `comms/outbox/` after you say yes. The communications agent shows you a
   preview before it creates anything, never sends email (drafts only), and
@@ -91,12 +105,13 @@ After processing, files move from each `inbox/` to that inbox's dated `archive/`
 
 ## Privacy
 
-- `archive/`, `travel/archive/`, and `home/archive/` hold original documents
-  **unredacted**, including addresses and account numbers.
+- `archive/`, `travel/archive/`, `home/archive/`, and `insurance/archive/` hold
+  original documents **unredacted**, including addresses and account and policy numbers.
 - Keep this folder out of public repos and shared cloud drives. If you put it under
   git, use a private remote only, or add the archive folders and the inboxes to
   `.gitignore`.
-- Working files store labels, not numbers: no account, loan, policy, or card numbers.
+- Working files store labels, not numbers: no account, loan, policy, member, or card
+  numbers, and no VINs.
   Properties are stored as a nickname plus city, state, and ZIP.
 - Everything the agents read is sent to the model provider under your account's data
   terms. Web searches include only the topic and the city or ZIP.

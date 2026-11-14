@@ -19,6 +19,9 @@
 
 ## Insurance
 
+<!-- Summary only. If the insurance advisor is set up, full coverage detail
+lives in insurance/policies/. -->
+
 - Carrier: · Deductible: · Wind/hail deductible:
 - Roof-age or other requirements from the carrier:
 

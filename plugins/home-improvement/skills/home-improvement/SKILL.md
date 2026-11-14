@@ -102,6 +102,7 @@ home/
 └── archive/<YYYY-MM-DD>/    # Processed source documents, moved verbatim
 portfolio/                   # Owned by portfolio-advisor. Read-only, except one line (see finance-link.md)
 travel/                      # Owned by vacation-planner. Never read or written.
+insurance/                   # Owned by insurance-advisor. Never read or written. (It reads home/profile.md and home/properties/.)
 comms/outbox/                # Owned by communications. Write new request files only (see comms-handoff.md)
 ```
 
@@ -114,8 +115,8 @@ Never create a workspace implicitly. A question asked from the wrong folder
 must not start a new set of folders there.
 
 - **`home/profile.md` exists here:** this is the workspace. Carry on.
-- **Not here, but `portfolio/profile.md`, `travel/profile.md`, or
-  `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set
+- **Not here, but `portfolio/profile.md`, `travel/profile.md`,
+  `insurance/profile.md`, or `comms/profile.md` is** (a sibling agent's workspace): this is the user's finance folder. Offer to set
   up `home/` here, and create it only after a yes.
 - **None of them here:** create nothing. Show the absolute path of the current
   folder and say plainly that there's no finance workspace in it. Check the

@@ -5,6 +5,7 @@ inbox/
 archive/
 travel/
 home/
+insurance/
 .DS_Store
 
 # Build output (release assets)

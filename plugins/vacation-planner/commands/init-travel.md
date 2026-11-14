@@ -12,8 +12,8 @@ directory.
    If a parent folder already has `travel/profile.md` or
    `portfolio/profile.md`, name it and suggest switching there instead. If
    `portfolio/profile.md` isn't here, say the affordability check will be off.
-   If `home/profile.md` isn't here either, no other agent uses this folder, so
-   ask again whether it's the right one. Warn if this is the home folder
+   If `home/profile.md` and `insurance/profile.md` aren't here either, no
+   other agent uses this folder, so ask again whether it's the right one. Warn if this is the home folder
    itself or a code repo with source files.
 3. Create `travel/`, `travel/trips/`, `travel/inbox/`, and `travel/archive/`.
    Add an empty `.gitkeep` to `trips/`, `inbox/`, and `archive/`.
